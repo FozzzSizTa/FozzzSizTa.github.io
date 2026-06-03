@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>張萁元 | 作品集</title>
+    <meta name="description" content="張萁元的作品集頁面。" />
+    <style>
+      :root {
+        --bg: #f2efe7;
+        --surface: rgba(255, 255, 255, 0.82);
+        --text: #1b2430;
+        --muted: #66707c;
+        --accent: #9b7a33;
+        --line: rgba(27, 36, 48, 0.12);
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; min-height: 100%; }
+      body {
+        font-family: "Segoe UI", "Noto Sans TC", Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top right, rgba(155, 122, 51, 0.14) 0, rgba(155, 122, 51, 0) 26%),
+          linear-gradient(135deg, #eef2f6 0%, var(--bg) 100%);
+      }
+      .wrap { max-width: 980px; margin: 0 auto; padding: 2rem 1.25rem 3rem; }
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: 1.6rem;
+        box-shadow: 0 20px 50px rgba(27, 36, 48, 0.12);
+        backdrop-filter: blur(12px);
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.4rem;
+      }
+      a.back {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        text-decoration: none;
+        color: var(--text);
+        padding: 0.85rem 1.1rem;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.68);
+      }
+      a.back:hover { background: #fff; }
+      h1 { margin: 0; font-size: clamp(2rem, 3vw, 3rem); }
+      .lead { margin: 0.55rem 0 0; color: var(--muted); line-height: 1.8; }
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        min-height: 180px;
+        padding: 1rem;
+        border-radius: 22px;
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.58));
+      }
+      .card strong { display: block; margin-bottom: 0.55rem; }
+      .card p { margin: 0; color: var(--muted); line-height: 1.8; }
+      .tag {
+        display: inline-block;
+        margin-top: 0.9rem;
+        padding: 0.45rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(155, 122, 51, 0.12);
+        color: #73561f;
+        border: 1px solid rgba(155, 122, 51, 0.2);
+      }
+      @media (max-width: 760px) {
+        .gallery { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="panel">
+        <div class="top">
+          <div>
+            <h1>作品集</h1>
+            <p class="lead">這一頁先保留為作品展示區，之後可放專案截圖、設計成品、網站作品或其他成果。</p>
+          </div>
+          <a class="back" href="index.html">回到主畫面</a>
+        </div>
+
+        <div class="gallery">
+          <article class="card">
+            <strong>作品 01</strong>
+            <p>之後可放置專案名稱、簡介與成果摘要。</p>
+            <span class="tag">Project</span>
+          </article>
+          <article class="card">
+            <strong>作品 02</strong>
+            <p>這裡可以加入圖片、連結與作品說明。</p>
+            <span class="tag">Design</span>
+          </article>
+          <article class="card">
+            <strong>作品 03</strong>
+            <p>可作為作品列表的第三個區塊或案例。</p>
+            <span class="tag">Case Study</span>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
