@@ -68,10 +68,30 @@
       .delay-4 { --delay: 380ms; }
       .delay-5 { --delay: 480ms; }
 
-            background: linear-gradient(90deg, #0284c7 0 var(--fill), rgba(125, 211, 252, 0.46) var(--fill) 100%);
+      .page {
         min-height: 100vh;
+        display: flex;
         flex-direction: column;
       }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.05rem clamp(1.1rem, 3vw, 2.5rem);
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+      }
+
+      .socials {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .social-link {
         width: 2.2rem;
         height: 2.2rem;
         display: inline-grid;
