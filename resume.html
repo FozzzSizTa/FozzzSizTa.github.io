@@ -59,13 +59,14 @@
       .animate {
         opacity: 0;
         animation: riseIn 0.85s cubic-bezier(0.12, 0.88, 0.22, 1) both;
+        animation-delay: var(--delay, 0ms);
       }
 
-      .delay-1 { animation-delay: 0.08s; }
-      .delay-2 { animation-delay: 0.18s; }
-      .delay-3 { animation-delay: 0.28s; }
-      .delay-4 { animation-delay: 0.38s; }
-      .delay-5 { animation-delay: 0.48s; }
+      .delay-1 { --delay: 80ms; }
+      .delay-2 { --delay: 180ms; }
+      .delay-3 { --delay: 280ms; }
+      .delay-4 { --delay: 380ms; }
+      .delay-5 { --delay: 480ms; }
 
       .page {
         min-height: 100vh;
@@ -145,7 +146,7 @@
       }
 
       .wrap {
-        max-width: 1120px;
+        max-width: 1240px;
         margin: 0 auto;
         padding: 2rem 1.25rem 3rem;
         width: 100%;
@@ -158,6 +159,124 @@
         padding: 1.6rem;
         box-shadow: var(--shadow);
         backdrop-filter: blur(12px);
+      }
+
+      .resume-layout {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .resume-section {
+        padding: 1.35rem;
+        border-radius: 24px;
+        background: rgba(255, 255, 255, 0.62);
+        border: 1px solid var(--line);
+      }
+
+      .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .section-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.42rem 0.75rem;
+        border-radius: 999px;
+        background: rgba(14, 165, 233, 0.1);
+        border: 1px solid rgba(14, 165, 233, 0.18);
+        color: #075985;
+        font-size: 0.86rem;
+        letter-spacing: 0.08em;
+      }
+
+      .section-kicker::before {
+        content: "";
+        width: 0.45rem;
+        height: 0.45rem;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .section-title {
+        margin: 0.35rem 0 0;
+        font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      }
+
+      .section-desc {
+        margin: 0.35rem 0 0;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .cards-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.9rem;
+      }
+
+      .resume-card {
+        padding: 1rem 1rem 1.05rem;
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.76);
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+        min-height: 140px;
+      }
+
+      .resume-card h3 {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+
+      .resume-card p {
+        margin: 0.65rem 0 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.85rem;
+      }
+
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.42rem 0.72rem;
+        border-radius: 999px;
+        background: rgba(14, 165, 233, 0.1);
+        color: #075985;
+        border: 1px solid rgba(14, 165, 233, 0.18);
+        font-size: 0.86rem;
+      }
+
+      .summary-card {
+        grid-column: 1 / -1;
+      }
+
+      .section-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .section-link::before {
+        content: "";
+        width: 2.4rem;
+        height: 1px;
+        background: var(--line);
       }
 
       .top {
@@ -196,40 +315,6 @@
         line-height: 1.8;
       }
 
-      .block {
-        margin-top: 1.2rem;
-        padding: 1.2rem;
-        border-radius: 22px;
-        background: rgba(255, 255, 255, 0.66);
-        border: 1px solid var(--line);
-      }
-
-      .block h2 {
-        margin: 0 0 0.65rem;
-        font-size: 1.15rem;
-      }
-
-      .block p {
-        margin: 0;
-        color: var(--muted);
-        line-height: 1.9;
-      }
-
-      .pillrow {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.7rem;
-        margin-top: 0.9rem;
-      }
-
-      .pill {
-        padding: 0.55rem 0.8rem;
-        border-radius: 999px;
-        background: rgba(14, 165, 233, 0.1);
-        color: #075985;
-        border: 1px solid rgba(14, 165, 233, 0.18);
-      }
-
       @media (max-width: 920px) {
         .topbar {
           align-items: flex-start;
@@ -238,6 +323,20 @@
 
         .nav {
           justify-content: flex-start;
+        }
+
+        .cards-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .resume-section {
+          padding: 1rem;
+        }
+
+        .resume-card {
+          min-height: auto;
         }
       }
     </style>
@@ -269,20 +368,123 @@
           <div class="top">
             <div>
               <h1 class="animate delay-2">履歷</h1>
-              <p class="lead animate delay-3">這一頁先保留為履歷內容區，後續可放入學歷、工作經歷、技能與證照。</p>
+              <p class="lead animate delay-3">履歷頁先拆成兩大區塊：A 放個人資料與偏好，B 放專業與經歷。每個小卡都會按順序依序進場，不會同時全部跑出來。</p>
             </div>
             <a class="back animate delay-3" href="index.html">回到主畫面</a>
           </div>
 
-          <div class="block animate delay-4">
-            <h2>目前狀態</h2>
-            <p>頁面已建立，之後可以直接在這裡補上你的自我介紹、學經歷、專長與聯絡方式。</p>
-            <div class="pillrow">
-              <span class="pill fade-up delay-4">學歷</span>
-              <span class="pill fade-up delay-5">工作經歷</span>
-              <span class="pill fade-up delay-5">技能</span>
-              <span class="pill fade-up delay-5">證照</span>
-            </div>
+          <div class="resume-layout">
+            <section class="resume-section animate" style="--delay: 320ms;">
+              <div class="section-head">
+                <div>
+                  <div class="section-kicker animate" style="--delay: 380ms;">區塊 A</div>
+                  <h2 class="section-title animate" style="--delay: 440ms;">基本資訊與個人特質</h2>
+                  <p class="section-desc animate" style="--delay: 500ms;">這一區以比較輕鬆、個人化的內容為主，讓人先認識你是誰。</p>
+                </div>
+                <span class="section-link animate" style="--delay: 520ms;">Personal Profile</span>
+              </div>
+
+              <div class="cards-grid">
+                <article class="resume-card animate" style="--delay: 580ms;">
+                  <h3>個人資料</h3>
+                  <p>姓名、聯絡方式、所在地、社群帳號等基本資訊。</p>
+                  <div class="tags">
+                    <span class="tag">姓名</span>
+                    <span class="tag">聯絡方式</span>
+                    <span class="tag">所在地</span>
+                  </div>
+                </article>
+
+                <article class="resume-card animate" style="--delay: 680ms;">
+                  <h3>技能</h3>
+                  <p>可先列出設計、程式、文書或其他你想呈現的能力。</p>
+                  <div class="tags">
+                    <span class="tag">設計</span>
+                    <span class="tag">前端</span>
+                    <span class="tag">工具應用</span>
+                  </div>
+                </article>
+
+                <article class="resume-card animate" style="--delay: 780ms;">
+                  <h3>性格</h3>
+                  <p>用幾個關鍵字描述你的工作風格與合作方式。</p>
+                  <div class="tags">
+                    <span class="tag">細心</span>
+                    <span class="tag">負責</span>
+                    <span class="tag">學習快</span>
+                  </div>
+                </article>
+
+                <article class="resume-card animate" style="--delay: 880ms;">
+                  <h3>興趣</h3>
+                  <p>可放攝影、音樂、運動、閱讀或其他能補充個人特色的內容。</p>
+                  <div class="tags">
+                    <span class="tag">攝影</span>
+                    <span class="tag">音樂</span>
+                    <span class="tag">旅行</span>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <section class="resume-section animate" style="--delay: 980ms;">
+              <div class="section-head">
+                <div>
+                  <div class="section-kicker animate" style="--delay: 1040ms;">區塊 B</div>
+                  <h2 class="section-title animate" style="--delay: 1100ms;">專業經歷與成果</h2>
+                  <p class="section-desc animate" style="--delay: 1160ms;">這一區放更正式的內容，會依照摘要、認證、經驗、學歷、專案的順序逐一出現。</p>
+                </div>
+                <span class="section-link animate" style="--delay: 1180ms;">Professional Experience</span>
+              </div>
+
+              <div class="cards-grid">
+                <article class="resume-card summary-card animate" style="--delay: 1240ms;">
+                  <h3>摘要</h3>
+                  <p>先用一小段話簡述你的背景、強項與求職方向，讓人快速抓到重點。</p>
+                  <div class="tags">
+                    <span class="tag">自我介紹</span>
+                    <span class="tag">求職方向</span>
+                  </div>
+                </article>
+
+                <article class="resume-card animate" style="--delay: 1340ms;">
+                  <h3>專業認證</h3>
+                  <p>列出證照、課程或可證明專業能力的項目。</p>
+                  <div class="tags">
+                    <span class="tag">證照</span>
+                    <span class="tag">課程</span>
+                  </div>
+                </article>
+
+                <article class="resume-card animate" style="--delay: 1440ms;">
+                  <h3>工作經驗</h3>
+                  <p>依時間序列整理工作內容、職務名稱與你實際負責的事情。</p>
+                  <div class="tags">
+                    <span class="tag">職務</span>
+                    <span class="tag">成果</span>
+                  </div>
+                </article>
+
+                <article class="resume-card animate" style="--delay: 1540ms;">
+                  <h3>學歷</h3>
+                  <p>放學校、科系、修業期間與相關學習重點。</p>
+                  <div class="tags">
+                    <span class="tag">學校</span>
+                    <span class="tag">科系</span>
+                  </div>
+                </article>
+
+                <article class="resume-card animate" style="--delay: 1640ms;">
+                  <h3>專案經驗</h3>
+                  <p>列出你做過的專案、你負責的部分，以及最後的成果。</p>
+                  <div class="tags">
+                    <span class="tag">專案名稱</span>
+                    <span class="tag">角色</span>
+                    <span class="tag">成果</span>
+                  </div>
+                </article>
+              </div>
+            </section>
           </div>
         </section>
       </main>
