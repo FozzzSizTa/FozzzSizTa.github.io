@@ -33,7 +33,11 @@
         font-family: "Segoe UI", Arial, sans-serif;
         color: var(--text);
         background:
-          radial-gradient(circle at top left, rgba(14, 165, 233, 0.14), transparent 28%),
+          radial-gradient(
+            circle at top left,
+            rgba(14, 165, 233, 0.14),
+            transparent 28%
+          ),
           linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
       }
 
@@ -62,11 +66,21 @@
         animation-delay: var(--delay, 0ms);
       }
 
-      .delay-1 { --delay: 80ms; }
-      .delay-2 { --delay: 180ms; }
-      .delay-3 { --delay: 280ms; }
-      .delay-4 { --delay: 380ms; }
-      .delay-5 { --delay: 480ms; }
+      .delay-1 {
+        --delay: 80ms;
+      }
+      .delay-2 {
+        --delay: 180ms;
+      }
+      .delay-3 {
+        --delay: 280ms;
+      }
+      .delay-4 {
+        --delay: 380ms;
+      }
+      .delay-5 {
+        --delay: 480ms;
+      }
 
       .page {
         min-height: 100vh;
@@ -100,7 +114,10 @@
         color: var(--muted);
         background: rgba(255, 255, 255, 0.72);
         border: 1px solid rgba(23, 32, 51, 0.08);
-        transition: transform 180ms ease, color 180ms ease, border-color 180ms ease;
+        transition:
+          transform 180ms ease,
+          color 180ms ease,
+          border-color 180ms ease;
       }
 
       .social-link:hover {
@@ -285,7 +302,11 @@
         border-radius: 999px;
         overflow: hidden;
         border: 1px solid rgba(14, 165, 233, 0.16);
-        background: linear-gradient(90deg, #0ea5e9 0 var(--fill), rgba(125, 211, 252, 0.42) var(--fill) 100%);
+        background: linear-gradient(
+          90deg,
+          #0ea5e9 0 var(--fill),
+          rgba(125, 211, 252, 0.42) var(--fill) 100%
+        );
       }
 
       .tags {
@@ -579,7 +600,7 @@
                     前端工程師。從小對遊戲的狂熱，驅使我走上遊戲設計的道路；大二修習
                     Unity 3D
                     課程時，親手將創意轉化為互動畫面的成就感，更讓我確立了終身投入的目標。我精通
-                    C# 與 C++（5/5），具備獨立與團隊協作開發的能力，並善用 AI
+                    C# 與 C++，具備獨立與團隊協作開發的能力，並善用 AI
                     工具優化工作流程。期待加入貴團隊，將對遊戲的初心轉化為流暢、創新的前端玩家體驗。
                   </p>
                 </article>
