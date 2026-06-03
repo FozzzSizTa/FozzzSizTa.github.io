@@ -183,27 +183,6 @@
         flex-wrap: wrap;
       }
 
-      .section-kicker {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.45rem;
-        padding: 0.42rem 0.75rem;
-        border-radius: 999px;
-        background: rgba(14, 165, 233, 0.1);
-        border: 1px solid rgba(14, 165, 233, 0.18);
-        color: #075985;
-        font-size: 0.86rem;
-        letter-spacing: 0.08em;
-      }
-
-      .section-kicker::before {
-        content: "";
-        width: 0.45rem;
-        height: 0.45rem;
-        border-radius: 50%;
-        background: var(--accent);
-      }
-
       .section-title {
         margin: 0.35rem 0 0;
         font-size: clamp(1.5rem, 2.5vw, 2.2rem);
@@ -262,21 +241,6 @@
 
       .summary-card {
         grid-column: 1 / -1;
-      }
-
-      .section-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        color: var(--muted);
-        font-size: 0.92rem;
-      }
-
-      .section-link::before {
-        content: "";
-        width: 2.4rem;
-        height: 1px;
-        background: var(--line);
       }
 
       .top {
@@ -368,20 +332,17 @@
           <div class="top">
             <div>
               <h1 class="animate delay-2">履歷</h1>
-              <p class="lead animate delay-3">履歷頁先拆成兩大區塊：A 放個人資料與偏好，B 放專業與經歷。每個小卡都會按順序依序進場，不會同時全部跑出來。</p>
             </div>
-            <a class="back animate delay-3" href="index.html">回到主畫面</a>
+            <a class="back animate delay-3" href="" download>下載履歷表</a>
           </div>
 
           <div class="resume-layout">
             <section class="resume-section animate" style="--delay: 320ms;">
               <div class="section-head">
                 <div>
-                  <div class="section-kicker animate" style="--delay: 380ms;">區塊 A</div>
                   <h2 class="section-title animate" style="--delay: 440ms;">基本資訊與個人特質</h2>
                   <p class="section-desc animate" style="--delay: 500ms;">這一區以比較輕鬆、個人化的內容為主，讓人先認識你是誰。</p>
                 </div>
-                <span class="section-link animate" style="--delay: 520ms;">Personal Profile</span>
               </div>
 
               <div class="cards-grid">
@@ -430,11 +391,9 @@
             <section class="resume-section animate" style="--delay: 980ms;">
               <div class="section-head">
                 <div>
-                  <div class="section-kicker animate" style="--delay: 1040ms;">區塊 B</div>
                   <h2 class="section-title animate" style="--delay: 1100ms;">專業經歷與成果</h2>
                   <p class="section-desc animate" style="--delay: 1160ms;">這一區放更正式的內容，會依照摘要、認證、經驗、學歷、專案的順序逐一出現。</p>
                 </div>
-                <span class="section-link animate" style="--delay: 1180ms;">Professional Experience</span>
               </div>
 
               <div class="cards-grid">
