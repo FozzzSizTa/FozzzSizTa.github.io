@@ -220,6 +220,82 @@
         line-height: 1.8;
       }
 
+      .bullet-list,
+      .score-list {
+        list-style: none;
+        padding: 0;
+        margin: 0.85rem 0 0;
+      }
+
+      .bullet-list {
+        display: grid;
+        gap: 0.55rem;
+      }
+
+      .bullet-list li {
+        position: relative;
+        padding-left: 1.1rem;
+        color: var(--muted);
+        line-height: 1.75;
+      }
+
+      .bullet-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.92em;
+        width: 0.42rem;
+        height: 0.42rem;
+        border-radius: 999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.12);
+        transform: translateY(-50%);
+      }
+
+      .score-list {
+        display: grid;
+        gap: 0.72rem;
+      }
+
+      .score-item {
+        display: grid;
+        gap: 0.34rem;
+      }
+
+      .score-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.8rem;
+        align-items: baseline;
+        color: var(--text);
+        font-size: 0.95rem;
+      }
+
+      .score-label {
+        font-weight: 600;
+      }
+
+      .score-value {
+        color: var(--muted);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .score-track {
+        height: 0.62rem;
+        background: rgba(14, 165, 233, 0.12);
+        border-radius: 999px;
+        overflow: hidden;
+        border: 1px solid rgba(14, 165, 233, 0.16);
+      }
+
+      .score-fill {
+        width: var(--fill, 0%);
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #7dd3fc 0%, #0ea5e9 55%, #0284c7 100%);
+      }
+
       .tags {
         display: flex;
         flex-wrap: wrap;
@@ -341,54 +417,93 @@
               <div class="section-head">
                 <div>
                   <h2 class="section-title animate" style="--delay: 440ms;">基本資訊與個人特質</h2>
-                  <p class="section-desc animate" style="--delay: 500ms;">這一區以比較輕鬆、個人化的內容為主，讓人先認識你是誰。</p>
                 </div>
               </div>
 
               <div class="cards-grid">
                 <article class="resume-card animate" style="--delay: 580ms;">
                   <h3>個人資料</h3>
-                  <p>張萁元 · (+886) 905-459-925 · ben917355@gmail.com</p>
-                  <p style="margin-top:0.6rem;color:var(--muted);">新北市淡水區 忠山里 奎柔山路766號二樓</p>
+                  <ul class="bullet-list">
+                    <li>張萁元</li>
+                    <li>(+886) 905-459-925</li>
+                    <li>ben917355@gmail.com</li>
+                    <li>新北市淡水區忠山里奎柔山路766號二樓</li>
+                  </ul>
                 </article>
 
                 <article class="resume-card animate" style="--delay: 680ms;">
                   <h3>技能</h3>
-                  <p>主要技術與工具（滿分 5）：</p>
-                  <div class="tags" style="margin-top:0.6rem;">
-                    <span class="tag">Unity 平台 5/5</span>
-                    <span class="tag">C# 5/5</span>
-                    <span class="tag">C++ 5/5</span>
-                    <span class="tag">Python 3/5</span>
-                    <span class="tag">Java 3/5</span>
-                    <span class="tag">Linux 4/5</span>
-                    <span class="tag">HTML 3/5</span>
-                    <span class="tag">Stable Diffusion 4/5</span>
-                    <span class="tag">LLM / AI 溝通與應用 4/5</span>
-                  </div>
+                  <ul class="score-list">
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">Unity 平台</span><span class="score-value">5/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 100%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">C#</span><span class="score-value">5/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 100%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">C++</span><span class="score-value">5/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 100%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">Python</span><span class="score-value">3/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 60%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">Java</span><span class="score-value">3/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 60%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">Linux</span><span class="score-value">4/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 80%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">HTML</span><span class="score-value">3/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 60%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">Stable Diffusion</span><span class="score-value">4/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 80%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">LLM / AI 溝通與應用</span><span class="score-value">4/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 80%;"></span></div>
+                    </li>
+                  </ul>
                 </article>
 
                 <article class="resume-card animate" style="--delay: 780ms;">
                   <h3>性格與工作風格</h3>
-                  <p>活潑且積極、對工作謹慎負責、善於溝通協作，能獨立完成任務或融入團隊合作。</p>
-                  <p style="margin-top:0.6rem;color:var(--muted);">習慣事前整理思路與工作流程，以提高效率並減少溝通成本。</p>
-                  <div class="tags" style="margin-top:0.6rem;">
-                    <span class="tag">活潑</span>
-                    <span class="tag">認真</span>
-                    <span class="tag">善於溝通</span>
-                    <span class="tag">獨立／團隊皆可</span>
-                  </div>
+                  <ul class="bullet-list">
+                    <li>個性活潑，能快速融入團隊互動。</li>
+                    <li>做事認真負責，重視細節與完成度。</li>
+                    <li>善於溝通與協作，能順暢與不同角色配合。</li>
+                    <li>可獨立作業，也能配合團隊共同推進專案。</li>
+                    <li>習慣事前梳理思路與工作流程，以提升執行效率。</li>
+                  </ul>
                 </article>
 
                 <article class="resume-card animate" style="--delay: 880ms;">
                   <h3>興趣</h3>
-                  <p>個人興趣與偏好（滿分 5）：</p>
-                  <div class="tags" style="margin-top:0.6rem;">
-                    <span class="tag">玩遊戲 5/5</span>
-                    <span class="tag">與 AI 設計程式 5/5</span>
-                    <span class="tag">繪圖 4/5</span>
-                    <span class="tag">養魚 4/5</span>
-                  </div>
+                  <ul class="score-list">
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">玩遊戲</span><span class="score-value">5/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 100%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">與 AI 設計程式</span><span class="score-value">5/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 100%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">繪圖</span><span class="score-value">4/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 80%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">養魚</span><span class="score-value">4/5</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 80%;"></span></div>
+                    </li>
+                  </ul>
                 </article>
               </div>
             </section>
@@ -397,55 +512,95 @@
               <div class="section-head">
                 <div>
                   <h2 class="section-title animate" style="--delay: 1100ms;">專業經歷與成果</h2>
-                  <p class="section-desc animate" style="--delay: 1160ms;">這一區放更正式的內容，會依照摘要、認證、經驗、學歷、專案的順序逐一出現。</p>
                 </div>
               </div>
 
               <div class="cards-grid">
                 <article class="resume-card summary-card animate" style="--delay: 1240ms;">
                   <h3>摘要</h3>
-                  <p>先用一小段話簡述你的背景、強項與求職方向，讓人快速抓到重點。</p>
-                  <div class="tags">
-                    <span class="tag">自我介紹</span>
-                    <span class="tag">求職方向</span>
-                  </div>
+                  <ul class="bullet-list">
+                    <li>熱愛遊戲開發，並具備扎實的 Unity 前端開發實力。</li>
+                    <li>自大二修習 Unity 3D 課程後，便確立將遊戲設計作為長期投入方向。</li>
+                    <li>精通 C# 與 C++，可獨立開發，也具備團隊協作能力。</li>
+                    <li>善用 AI 工具優化工作流程，提升開發效率與產出品質。</li>
+                    <li>期望加入貴團隊，將對遊戲的熱情轉化為流暢且具創新的前端玩家體驗。</li>
+                  </ul>
                 </article>
 
                 <article class="resume-card animate" style="--delay: 1340ms;">
                   <h3>專業認證</h3>
-                  <p>列出證照、課程或可證明專業能力的項目。</p>
-                  <div class="tags">
-                    <span class="tag">證照</span>
-                    <span class="tag">課程</span>
-                  </div>
+                  <ul class="bullet-list">
+                    <li>2023 CPE 大學程式能力檢定</li>
+                    <li>解題數：3</li>
+                    <li>排名：15.7%</li>
+                  </ul>
                 </article>
 
                 <article class="resume-card animate" style="--delay: 1440ms;">
                   <h3>工作經驗</h3>
-                  <p>依時間序列整理工作內容、職務名稱與你實際負責的事情。</p>
-                  <div class="tags">
-                    <span class="tag">職務</span>
-                    <span class="tag">成果</span>
-                  </div>
+                  <ul class="bullet-list">
+                    <li>早餐店零工｜2023 年 6 月至 2023 年 8 月</li>
+                  </ul>
                 </article>
 
                 <article class="resume-card animate" style="--delay: 1540ms;">
                   <h3>學歷</h3>
-                  <p>放學校、科系、修業期間與相關學習重點。</p>
-                  <div class="tags">
-                    <span class="tag">學校</span>
-                    <span class="tag">科系</span>
-                  </div>
+                  <ul class="bullet-list">
+                    <li>銘傳大學資訊工程學系｜學士</li>
+                  </ul>
+
+                  <ul class="score-list" style="margin-top:1rem;">
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">Unity3D 設計</span><span class="score-value">90/100</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 90%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">動態網頁</span><span class="score-value">71/100</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 71%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">資安導論</span><span class="score-value">78/100</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 78%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">資料倉儲</span><span class="score-value">86/100</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 86%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">Python 程設</span><span class="score-value">84/100</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 84%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">伺服器架設</span><span class="score-value">90/100</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 90%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">網站伺服器</span><span class="score-value">85/100</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 85%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">視窗程式設計</span><span class="score-value">65/100</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 65%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">人工智慧</span><span class="score-value">86/100</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 86%;"></span></div>
+                    </li>
+                    <li class="score-item">
+                      <div class="score-top"><span class="score-label">影像處理</span><span class="score-value">79/100</span></div>
+                      <div class="score-track"><span class="score-fill" style="--fill: 79%;"></span></div>
+                    </li>
+                  </ul>
                 </article>
 
                 <article class="resume-card animate" style="--delay: 1640ms;">
                   <h3>專案經驗</h3>
-                  <p>列出你做過的專案、你負責的部分，以及最後的成果。</p>
-                  <div class="tags">
-                    <span class="tag">專案名稱</span>
-                    <span class="tag">角色</span>
-                    <span class="tag">成果</span>
-                  </div>
+                  <ul class="bullet-list">
+                    <li>畢業專題｜2025–2026</li>
+                    <li>角色：前端遊戲設計師</li>
+                    <li>獲獎：TANET 專題優秀作品獎（2025）</li>
+                    <li>工作內容：TANET 場次報告主講</li>
+                  </ul>
                 </article>
               </div>
             </section>
