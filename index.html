@@ -192,6 +192,10 @@
         min-height: calc(100vh - 5.2rem);
       }
 
+      .hero-card {
+        position: relative;
+      }
+
       .hero-copy {
         max-width: 34rem;
       }
@@ -278,8 +282,8 @@
 
       .portrait {
         position: relative;
-        min-height: 34rem;
-        border-radius: 32px;
+        min-height: 42rem;
+        border-radius: 36px;
         background:
           radial-gradient(circle at 40% 25%, rgba(255, 255, 255, 0.9), transparent 18%),
           radial-gradient(circle at 58% 50%, rgba(255, 255, 255, 0.16), transparent 21%),
@@ -288,6 +292,23 @@
         box-shadow: var(--shadow);
         overflow: hidden;
         isolation: isolate;
+      }
+
+      .portrait::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0;
+        height: 42%;
+        background: linear-gradient(180deg, transparent 0%, rgba(17, 24, 39, 0.18) 55%, rgba(17, 24, 39, 0.42) 100%);
+      }
+
+      .portrait-frame {
+        position: absolute;
+        inset: 1rem;
+        border-radius: 30px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+        overflow: hidden;
       }
 
       .portrait::before {
@@ -307,18 +328,10 @@
         mix-blend-mode: screen;
       }
 
-      .portrait::after {
-        content: "";
-        position: absolute;
-        inset: auto -10% 0;
-        height: 58%;
-        background: linear-gradient(180deg, transparent, rgba(17, 24, 39, 0.16) 45%, rgba(17, 24, 39, 0.38) 100%);
-      }
-
       .portrait-badge {
         position: absolute;
-        left: 1.2rem;
-        bottom: 1.2rem;
+        left: 1.5rem;
+        bottom: 1.5rem;
         z-index: 1;
         padding: 0.85rem 1rem;
         border-radius: 18px;
@@ -383,10 +396,10 @@
     <div class="page">
       <header class="topbar animate delay-1">
         <div class="socials" aria-label="社群連結">
-          <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook">
+          <a class="social-link" href="https://www.facebook.com/zhang.qi.yuan.685201" target="_blank" rel="noreferrer" aria-label="Facebook">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.76l.41-3.2H13.5V8.6c0-.93.26-1.56 1.6-1.56h1.7V4.18c-.3-.04-1.33-.12-2.53-.12-2.5 0-4.22 1.53-4.22 4.34v2.5H7.28v3.2h2.76V22h3.46z"/></svg>
           </a>
-          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+          <a class="social-link" href="https://www.instagram.com/fozzz_sizta/" target="_blank" rel="noreferrer" aria-label="Instagram">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm9.9 1.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1Zm-5.65 1.27a5.28 5.28 0 1 1 0 10.56 5.28 5.28 0 0 1 0-10.56Zm0 1.8a3.48 3.48 0 1 0 0 6.96 3.48 3.48 0 0 0 0-6.96Z"/></svg>
           </a>
           <a class="social-link" href="https://github.com/FozzzSizTa" target="_blank" rel="noreferrer" aria-label="GitHub">
@@ -413,7 +426,8 @@
             </div>
           </div>
 
-          <div class="portrait animate delay-3" aria-label="主頁視覺區塊">
+          <div class="portrait animate delay-3 hero-card" aria-label="主頁視覺區塊">
+            <div class="portrait-frame"></div>
             <div class="portrait-badge animate delay-5">
               <strong>網站建設中</strong>
               <span>主頁先完成，其他內容之後補齊</span>
