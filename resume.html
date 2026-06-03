@@ -3,38 +3,163 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>張萁元 | 履歷</title>
+    <title>張萁元｜履歷</title>
     <meta name="description" content="張萁元的履歷頁面。" />
     <style>
       :root {
-        --bg: #f6f1e8;
-        --surface: rgba(255, 255, 255, 0.82);
-        --text: #1b2430;
-        --muted: #66707c;
-        --accent: #b58a3c;
-        --line: rgba(27, 36, 48, 0.12);
+        color-scheme: light;
+        --bg: #eef1f5;
+        --surface: rgba(255, 255, 255, 0.78);
+        --surface-strong: rgba(255, 255, 255, 0.92);
+        --text: #172033;
+        --muted: #667085;
+        --accent: #0ea5e9;
+        --accent-dark: #0284c7;
+        --line: rgba(23, 32, 51, 0.12);
+        --shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
       }
 
-      * { box-sizing: border-box; }
-      html, body { margin: 0; min-height: 100%; }
-      body {
-        font-family: "Segoe UI", "Noto Sans TC", Arial, sans-serif;
-        color: var(--text);
-        background: linear-gradient(135deg, #eef2f6 0%, var(--bg) 100%);
+      * {
+        box-sizing: border-box;
       }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(14, 165, 233, 0.14), transparent 28%),
+          linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      @keyframes riseIn {
+        from {
+          opacity: 0;
+          transform: translateY(24px);
+          filter: blur(10px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      .animate {
+        opacity: 0;
+        animation: riseIn 0.85s cubic-bezier(0.12, 0.88, 0.22, 1) both;
+      }
+
+      .delay-1 { animation-delay: 0.08s; }
+      .delay-2 { animation-delay: 0.18s; }
+      .delay-3 { animation-delay: 0.28s; }
+      .delay-4 { animation-delay: 0.38s; }
+      .delay-5 { animation-delay: 0.48s; }
+
+      .page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        padding: 1.05rem clamp(1.1rem, 3vw, 2.5rem);
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+      }
+
+      .socials {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+
+      .social-link {
+        width: 2.2rem;
+        height: 2.2rem;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        transition: transform 180ms ease, color 180ms ease, border-color 180ms ease;
+      }
+
+      .social-link:hover {
+        transform: translateY(-2px);
+        color: var(--accent-dark);
+        border-color: rgba(14, 165, 233, 0.3);
+      }
+
+      .social-link svg {
+        width: 1rem;
+        height: 1rem;
+        fill: currentColor;
+      }
+
+      .nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 1.5rem;
+        font-size: 0.95rem;
+      }
+
+      .nav a {
+        color: var(--muted);
+        position: relative;
+        padding-bottom: 0.15rem;
+      }
+
+      .nav a:hover,
+      .nav a[aria-current="page"] {
+        color: var(--text);
+      }
+
+      .nav a[aria-current="page"]::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.25rem;
+        height: 2px;
+        border-radius: 999px;
+        background: var(--accent);
+      }
+
       .wrap {
-        max-width: 980px;
+        max-width: 1120px;
         margin: 0 auto;
         padding: 2rem 1.25rem 3rem;
+        width: 100%;
       }
+
       .panel {
         background: var(--surface);
         border: 1px solid var(--line);
         border-radius: 28px;
         padding: 1.6rem;
-        box-shadow: 0 20px 50px rgba(27, 36, 48, 0.12);
+        box-shadow: var(--shadow);
         backdrop-filter: blur(12px);
       }
+
       .top {
         display: flex;
         justify-content: space-between;
@@ -43,6 +168,7 @@
         flex-wrap: wrap;
         margin-bottom: 1.4rem;
       }
+
       a.back {
         display: inline-flex;
         align-items: center;
@@ -52,52 +178,114 @@
         padding: 0.85rem 1.1rem;
         border-radius: 999px;
         border: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.68);
+        background: rgba(255, 255, 255, 0.72);
       }
-      a.back:hover { background: #fff; }
-      h1 { margin: 0; font-size: clamp(2rem, 3vw, 3rem); }
-      .lead { margin: 0.55rem 0 0; color: var(--muted); line-height: 1.8; }
+
+      a.back:hover {
+        background: #fff;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 3vw, 3rem);
+      }
+
+      .lead {
+        margin: 0.55rem 0 0;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
       .block {
         margin-top: 1.2rem;
         padding: 1.2rem;
         border-radius: 22px;
-        background: rgba(255, 255, 255, 0.62);
+        background: rgba(255, 255, 255, 0.66);
         border: 1px solid var(--line);
       }
-      .block h2 { margin: 0 0 0.65rem; font-size: 1.15rem; }
-      .block p { margin: 0; color: var(--muted); line-height: 1.9; }
-      .pillrow { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 0.9rem; }
+
+      .block h2 {
+        margin: 0 0 0.65rem;
+        font-size: 1.15rem;
+      }
+
+      .block p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.9;
+      }
+
+      .pillrow {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 0.9rem;
+      }
+
       .pill {
         padding: 0.55rem 0.8rem;
         border-radius: 999px;
-        background: rgba(181, 138, 60, 0.12);
-        color: #73561f;
-        border: 1px solid rgba(181, 138, 60, 0.2);
+        background: rgba(14, 165, 233, 0.1);
+        color: #075985;
+        border: 1px solid rgba(14, 165, 233, 0.18);
+      }
+
+      @media (max-width: 920px) {
+        .topbar {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .nav {
+          justify-content: flex-start;
+        }
       }
     </style>
   </head>
   <body>
-    <main class="wrap">
-      <section class="panel">
-        <div class="top">
-          <div>
-            <h1>履歷</h1>
-            <p class="lead">這一頁先保留為履歷內容區，後續可放入學歷、工作經歷、技能與證照。</p>
-          </div>
-          <a class="back" href="index.html">回到主畫面</a>
+    <div class="page">
+      <header class="topbar animate delay-1">
+        <div class="socials" aria-label="社群連結">
+          <a class="social-link" href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.76l.41-3.2H13.5V8.6c0-.93.26-1.56 1.6-1.56h1.7V4.18c-.3-.04-1.33-.12-2.53-.12-2.5 0-4.22 1.53-4.22 4.34v2.5H7.28v3.2h2.76V22h3.46z"/></svg>
+          </a>
+          <a class="social-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm9.9 1.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1Zm-5.65 1.27a5.28 5.28 0 1 1 0 10.56 5.28 5.28 0 0 1 0-10.56Zm0 1.8a3.48 3.48 0 1 0 0 6.96 3.48 3.48 0 0 0 0-6.96Z"/></svg>
+          </a>
+          <a class="social-link" href="https://github.com/FozzzSizTa" target="_blank" rel="noreferrer" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.21.68-.47v-1.64c-2.78.61-3.37-1.18-3.37-1.18-.46-1.18-1.12-1.49-1.12-1.49-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.9 1.54 2.35 1.1 2.92.84.09-.66.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.5 9.5 0 0 1 12 6.82c.85 0 1.7.11 2.5.33 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.68-4.58 4.92.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.47A10 10 0 0 0 12 2Z"/></svg>
+          </a>
         </div>
 
-        <div class="block">
-          <h2>目前狀態</h2>
-          <p>頁面已建立，之後可以直接在這裡補上你的自我介紹、學經歷、專長與聯絡方式。</p>
-          <div class="pillrow">
-            <span class="pill">學歷</span>
-            <span class="pill">工作經歷</span>
-            <span class="pill">技能</span>
-            <span class="pill">證照</span>
+        <nav class="nav" aria-label="主導覽">
+          <a href="index.html">主頁</a>
+          <a href="resume.html" aria-current="page">履歷</a>
+          <a href="portfolio.html">作品集</a>
+        </nav>
+      </header>
+
+      <main class="wrap">
+        <section class="panel animate delay-2">
+          <div class="top">
+            <div>
+              <h1 class="animate delay-2">履歷</h1>
+              <p class="lead animate delay-3">這一頁先保留為履歷內容區，後續可放入學歷、工作經歷、技能與證照。</p>
+            </div>
+            <a class="back animate delay-3" href="index.html">回到主畫面</a>
           </div>
-        </div>
-      </section>
-    </main>
+
+          <div class="block animate delay-4">
+            <h2>目前狀態</h2>
+            <p>頁面已建立，之後可以直接在這裡補上你的自我介紹、學經歷、專長與聯絡方式。</p>
+            <div class="pillrow">
+              <span class="pill fade-up delay-4">學歷</span>
+              <span class="pill fade-up delay-5">工作經歷</span>
+              <span class="pill fade-up delay-5">技能</span>
+              <span class="pill fade-up delay-5">證照</span>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
   </body>
 </html>
