@@ -68,30 +68,10 @@
       .delay-4 { --delay: 380ms; }
       .delay-5 { --delay: 480ms; }
 
-      .page {
+            background: linear-gradient(90deg, #0284c7 0 var(--fill), rgba(125, 211, 252, 0.46) var(--fill) 100%);
         min-height: 100vh;
-        display: flex;
         flex-direction: column;
       }
-
-      .topbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
-        padding: 1.05rem clamp(1.1rem, 3vw, 2.5rem);
-        border-bottom: 1px solid var(--line);
-        background: rgba(255, 255, 255, 0.55);
-        backdrop-filter: blur(16px);
-      }
-
-      .socials {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-      }
-
-      .social-link {
         width: 2.2rem;
         height: 2.2rem;
         display: inline-grid;
@@ -259,41 +239,56 @@
 
       .score-item {
         display: grid;
-        gap: 0.34rem;
+        grid-template-columns: minmax(0, 0.92fr) minmax(220px, 1.08fr);
+        gap: 0.9rem;
+        align-items: center;
       }
 
-      .score-top {
-        display: flex;
-        justify-content: space-between;
-        gap: 0.8rem;
-        align-items: baseline;
+      .score-name {
         color: var(--text);
-        font-size: 0.95rem;
-      }
-
-      .score-label {
         font-weight: 600;
+        line-height: 1.45;
       }
 
-      .score-value {
-        color: var(--muted);
-        white-space: nowrap;
-        font-variant-numeric: tabular-nums;
+      .score-meter {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
       }
 
       .score-track {
-        height: 0.62rem;
-        background: rgba(14, 165, 233, 0.12);
+        flex: 1;
+        height: 0.7rem;
+        position: relative;
+        background: rgba(125, 211, 252, 0.5);
         border-radius: 999px;
         overflow: hidden;
         border: 1px solid rgba(14, 165, 233, 0.16);
       }
 
       .score-fill {
+        position: absolute;
+        inset: 0 auto 0 0;
         width: var(--fill, 0%);
         height: 100%;
         border-radius: inherit;
-        background: linear-gradient(90deg, #7dd3fc 0%, #0ea5e9 55%, #0284c7 100%);
+        background: linear-gradient(90deg, #0ea5e9 0%, #0284c7 100%);
+      }
+
+      .score-rest {
+        position: absolute;
+        inset: 0 0 0 auto;
+        width: var(--rest, 0%);
+        height: 100%;
+        background: rgba(125, 211, 252, 0.42);
+      }
+
+      .score-percent {
+        color: var(--muted);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+        min-width: 3.1rem;
+        text-align: right;
       }
 
       .tags {
@@ -435,40 +430,40 @@
                   <h3>技能</h3>
                   <ul class="score-list">
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">Unity 平台</span><span class="score-value">5/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 100%;"></span></div>
+                      <div class="score-name">Unity 平台</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 100%;"></div><span class="score-percent">100%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">C#</span><span class="score-value">5/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 100%;"></span></div>
+                      <div class="score-name">C#</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 100%;"></div><span class="score-percent">100%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">C++</span><span class="score-value">5/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 100%;"></span></div>
+                      <div class="score-name">C++</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 100%;"></div><span class="score-percent">100%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">Python</span><span class="score-value">3/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 60%;"></span></div>
+                      <div class="score-name">Python</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 60%;"></div><span class="score-percent">60%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">Java</span><span class="score-value">3/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 60%;"></span></div>
+                      <div class="score-name">Java</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 60%;"></div><span class="score-percent">60%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">Linux</span><span class="score-value">4/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 80%;"></span></div>
+                      <div class="score-name">Linux</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 80%;"></div><span class="score-percent">80%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">HTML</span><span class="score-value">3/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 60%;"></span></div>
+                      <div class="score-name">HTML</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 60%;"></div><span class="score-percent">60%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">Stable Diffusion</span><span class="score-value">4/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 80%;"></span></div>
+                      <div class="score-name">Stable Diffusion</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 80%;"></div><span class="score-percent">80%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">LLM / AI 溝通與應用</span><span class="score-value">4/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 80%;"></span></div>
+                      <div class="score-name">LLM / AI 溝通與應用</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 80%;"></div><span class="score-percent">80%</span></div>
                     </li>
                   </ul>
                 </article>
@@ -488,20 +483,20 @@
                   <h3>興趣</h3>
                   <ul class="score-list">
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">玩遊戲</span><span class="score-value">5/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 100%;"></span></div>
+                      <div class="score-name">玩遊戲</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 100%;"></div><span class="score-percent">100%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">與 AI 設計程式</span><span class="score-value">5/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 100%;"></span></div>
+                      <div class="score-name">與 AI 設計程式</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 100%;"></div><span class="score-percent">100%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">繪圖</span><span class="score-value">4/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 80%;"></span></div>
+                      <div class="score-name">繪圖</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 80%;"></div><span class="score-percent">80%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">養魚</span><span class="score-value">4/5</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 80%;"></span></div>
+                      <div class="score-name">養魚</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 80%;"></div><span class="score-percent">80%</span></div>
                     </li>
                   </ul>
                 </article>
@@ -518,21 +513,15 @@
               <div class="cards-grid">
                 <article class="resume-card summary-card animate" style="--delay: 1240ms;">
                   <h3>摘要</h3>
-                  <ul class="bullet-list">
-                    <li>熱愛遊戲開發，並具備扎實的 Unity 前端開發實力。</li>
-                    <li>自大二修習 Unity 3D 課程後，便確立將遊戲設計作為長期投入方向。</li>
-                    <li>精通 C# 與 C++，可獨立開發，也具備團隊協作能力。</li>
-                    <li>善用 AI 工具優化工作流程，提升開發效率與產出品質。</li>
-                    <li>期望加入貴團隊，將對遊戲的熱情轉化為流暢且具創新的前端玩家體驗。</li>
-                  </ul>
+                  <p>我是一位熱愛遊戲並具備扎實開發實力的 Unity 前端工程師。從小對遊戲的狂熱，驅使我走上遊戲設計的道路；大二修習 Unity 3D 課程時，親手將創意轉化為互動畫面的成就感，更讓我確立了終身投入的目標。我精通 C# 與 C++（5/5），具備獨立與團隊協作開發的能力，並善用 AI 工具優化工作流程。期待加入貴團隊，將對遊戲的初心轉化為流暢、創新的前端玩家體驗。</p>
                 </article>
 
                 <article class="resume-card animate" style="--delay: 1340ms;">
                   <h3>專業認證</h3>
                   <ul class="bullet-list">
                     <li>2023 CPE 大學程式能力檢定</li>
-                    <li>解題數：3</li>
-                    <li>排名：15.7%</li>
+                    <li>・解題數：3</li>
+                    <li>・排名：15.7%</li>
                   </ul>
                 </article>
 
@@ -551,44 +540,44 @@
 
                   <ul class="score-list" style="margin-top:1rem;">
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">Unity3D 設計</span><span class="score-value">90/100</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 90%;"></span></div>
+                      <div class="score-name">Unity3D 設計</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 90%;"></div><span class="score-percent">90%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">動態網頁</span><span class="score-value">71/100</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 71%;"></span></div>
+                      <div class="score-name">動態網頁</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 71%;"></div><span class="score-percent">71%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">資安導論</span><span class="score-value">78/100</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 78%;"></span></div>
+                      <div class="score-name">資安導論</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 78%;"></div><span class="score-percent">78%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">資料倉儲</span><span class="score-value">86/100</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 86%;"></span></div>
+                      <div class="score-name">資料倉儲</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 86%;"></div><span class="score-percent">86%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">Python 程設</span><span class="score-value">84/100</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 84%;"></span></div>
+                      <div class="score-name">Python 程設</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 84%;"></div><span class="score-percent">84%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">伺服器架設</span><span class="score-value">90/100</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 90%;"></span></div>
+                      <div class="score-name">伺服器架設</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 90%;"></div><span class="score-percent">90%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">網站伺服器</span><span class="score-value">85/100</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 85%;"></span></div>
+                      <div class="score-name">網站伺服器</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 85%;"></div><span class="score-percent">85%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">視窗程式設計</span><span class="score-value">65/100</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 65%;"></span></div>
+                      <div class="score-name">視窗程式設計</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 65%;"></div><span class="score-percent">65%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">人工智慧</span><span class="score-value">86/100</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 86%;"></span></div>
+                      <div class="score-name">人工智慧</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 86%;"></div><span class="score-percent">86%</span></div>
                     </li>
                     <li class="score-item">
-                      <div class="score-top"><span class="score-label">影像處理</span><span class="score-value">79/100</span></div>
-                      <div class="score-track"><span class="score-fill" style="--fill: 79%;"></span></div>
+                      <div class="score-name">影像處理</div>
+                      <div class="score-meter"><div class="score-track" style="--fill: 79%;"></div><span class="score-percent">79%</span></div>
                     </li>
                   </ul>
                 </article>
@@ -597,9 +586,9 @@
                   <h3>專案經驗</h3>
                   <ul class="bullet-list">
                     <li>畢業專題｜2025–2026</li>
-                    <li>角色：前端遊戲設計師</li>
-                    <li>獲獎：TANET 專題優秀作品獎（2025）</li>
-                    <li>工作內容：TANET 場次報告主講</li>
+                    <li>・角色：前端遊戲設計師</li>
+                    <li>・TANET 專題優秀作品獎（2025）</li>
+                    <li>・工作內容：TANET 場次報告主講</li>
                   </ul>
                 </article>
               </div>
