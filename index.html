@@ -33,8 +33,16 @@
         font-family: "Segoe UI", Arial, sans-serif;
         color: var(--text);
         background:
-          radial-gradient(circle at top left, rgba(14, 165, 233, 0.18), transparent 28%),
-          radial-gradient(circle at right center, rgba(15, 23, 42, 0.08), transparent 22%),
+          radial-gradient(
+            circle at top left,
+            rgba(14, 165, 233, 0.18),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at right center,
+            rgba(15, 23, 42, 0.08),
+            transparent 22%
+          ),
           linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
         overflow-x: hidden;
       }
@@ -63,11 +71,21 @@
         animation: riseIn 0.85s cubic-bezier(0.12, 0.88, 0.22, 1) both;
       }
 
-      .delay-1 { animation-delay: 0.08s; }
-      .delay-2 { animation-delay: 0.18s; }
-      .delay-3 { animation-delay: 0.28s; }
-      .delay-4 { animation-delay: 0.38s; }
-      .delay-5 { animation-delay: 0.48s; }
+      .delay-1 {
+        animation-delay: 0.08s;
+      }
+      .delay-2 {
+        animation-delay: 0.18s;
+      }
+      .delay-3 {
+        animation-delay: 0.28s;
+      }
+      .delay-4 {
+        animation-delay: 0.38s;
+      }
+      .delay-5 {
+        animation-delay: 0.48s;
+      }
 
       .page {
         min-height: 100vh;
@@ -101,7 +119,10 @@
         color: var(--muted);
         background: rgba(255, 255, 255, 0.72);
         border: 1px solid rgba(23, 32, 51, 0.08);
-        transition: transform 180ms ease, color 180ms ease, border-color 180ms ease;
+        transition:
+          transform 180ms ease,
+          color 180ms ease,
+          border-color 180ms ease;
       }
 
       .social-link:hover {
@@ -168,7 +189,11 @@
         height: 22rem;
         right: -6rem;
         top: 3rem;
-        background: radial-gradient(circle, rgba(15, 23, 42, 0.18), transparent 65%);
+        background: radial-gradient(
+          circle,
+          rgba(15, 23, 42, 0.18),
+          transparent 65%
+        );
       }
 
       .hero::after {
@@ -176,7 +201,11 @@
         height: 18rem;
         left: -5rem;
         bottom: -4rem;
-        background: radial-gradient(circle, rgba(14, 165, 233, 0.2), transparent 65%);
+        background: radial-gradient(
+          circle,
+          rgba(14, 165, 233, 0.2),
+          transparent 65%
+        );
       }
 
       .hero-inner {
@@ -192,28 +221,22 @@
         overflow: hidden;
         min-height: clamp(540px, 72vh, 760px);
         border-radius: 38px;
-        box-shadow: var(--shadow);
+        box-shadow:
+          0 40px 100px -20px rgba(15, 23, 42, 0.25),
+          0 20px 50px -15px rgba(15, 23, 42, 0.15),
+          inset 0 0 80px rgba(0, 0, 0, 0.4); /* 內陰影淡化圖片邊緣 */
         background:
-          linear-gradient(95deg, rgba(9, 15, 28, 0.72) 0%, rgba(9, 15, 28, 0.42) 34%, rgba(9, 15, 28, 0.16) 62%, rgba(9, 15, 28, 0.08) 100%),
-          radial-gradient(circle at 24% 28%, rgba(255, 255, 255, 0.25) 0, rgba(255, 255, 255, 0) 25%),
-          linear-gradient(160deg, #aab3c0 0%, #7e8898 36%, #556072 68%, #3f4a5d 100%);
+          linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url(../image/business_card/1.png) no-repeat center center;
+        background-size: cover;
+        border: 1px solid rgba(255, 255, 255, 0.15); /* 柔化物理邊緣 */
       }
 
       .hero-card::before {
         content: "";
         position: absolute;
         inset: 0;
-        background:
-          radial-gradient(circle at 58% 26%, rgba(255, 231, 208, 0.55), transparent 10%),
-          radial-gradient(circle at 58% 38%, rgba(255, 205, 171, 0.94), transparent 11%),
-          radial-gradient(circle at 57% 47%, rgba(57, 44, 39, 0.95), transparent 8%),
-          radial-gradient(circle at 58% 51%, rgba(255, 255, 255, 0.98), transparent 20%),
-          radial-gradient(circle at 60% 55%, rgba(18, 18, 23, 0.94), transparent 6%),
-          radial-gradient(circle at 67% 49%, rgba(255, 255, 255, 0.92), transparent 9%),
-          radial-gradient(circle at 49% 50%, rgba(255, 255, 255, 0.16), transparent 24%),
-          radial-gradient(circle at 56% 68%, rgba(255, 255, 255, 0.14), transparent 26%);
-        opacity: 0.95;
-        mix-blend-mode: screen;
+        content: none; /* 移除複雜的疊加效果，讓背景圖片更清晰 */
       }
 
       .hero-card::after {
@@ -221,7 +244,12 @@
         position: absolute;
         inset: auto 0 0;
         height: 42%;
-        background: linear-gradient(180deg, transparent 0%, rgba(7, 12, 22, 0.18) 55%, rgba(7, 12, 22, 0.42) 100%);
+        background: linear-gradient(
+          180deg,
+          transparent 0%,
+          rgba(7, 12, 22, 0.18) 55%,
+          rgba(7, 12, 22, 0.42) 100%
+        );
       }
 
       .hero-copy {
@@ -261,18 +289,24 @@
         margin: 1.2rem 0 0;
         font-size: clamp(3rem, 8vw, 6rem);
         line-height: 0.92;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
+        letter-spacing: 0.04em; /* 調整字距，讓名字更自然 */
+        text-transform: none; /* 移除大寫轉換 */
         text-wrap: balance;
       }
 
       h1 span {
-        display: block;
-        margin-top: 1rem;
-        font-size: clamp(1.1rem, 2vw, 1.4rem);
-        letter-spacing: 0.04em;
-        text-transform: none;
-        color: rgba(255, 255, 255, 0.82);
+        display: none; /* 移除此元素，因為不再需要副標題 */
+      }
+
+      .contact-info {
+        margin-top: 1.5rem;
+        max-width: 32rem;
+        font-size: 1.04rem;
+        line-height: 1.9;
+        color: rgba(255, 255, 255, 0.84);
+      }
+      .contact-info p {
+        margin: 0.5rem 0; /* 增加聯絡資訊行距 */
       }
 
       .intro {
@@ -299,7 +333,10 @@
         border-radius: 999px;
         border: 1px solid transparent;
         font-weight: 600;
-        transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
+        transition:
+          transform 180ms ease,
+          background 180ms ease,
+          border-color 180ms ease;
       }
 
       .button:hover {
@@ -361,14 +398,44 @@
     <div class="page">
       <header class="topbar animate delay-1">
         <div class="socials" aria-label="社群連結">
-          <a class="social-link" href="https://www.facebook.com/zhang.qi.yuan.685201" target="_blank" rel="noreferrer" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.76l.41-3.2H13.5V8.6c0-.93.26-1.56 1.6-1.56h1.7V4.18c-.3-.04-1.33-.12-2.53-.12-2.5 0-4.22 1.53-4.22 4.34v2.5H7.28v3.2h2.76V22h3.46z"/></svg>
+          <a
+            class="social-link"
+            href="https://www.facebook.com/zhang.qi.yuan.685201"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Facebook"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M13.5 22v-8.2h2.76l.41-3.2H13.5V8.6c0-.93.26-1.56 1.6-1.56h1.7V4.18c-.3-.04-1.33-.12-2.53-.12-2.5 0-4.22 1.53-4.22 4.34v2.5H7.28v3.2h2.76V22h3.46z"
+              />
+            </svg>
           </a>
-          <a class="social-link" href="https://www.instagram.com/fozzz_sizta/" target="_blank" rel="noreferrer" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm9.9 1.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1Zm-5.65 1.27a5.28 5.28 0 1 1 0 10.56 5.28 5.28 0 0 1 0-10.56Zm0 1.8a3.48 3.48 0 1 0 0 6.96 3.48 3.48 0 0 0 0-6.96Z"/></svg>
+          <a
+            class="social-link"
+            href="https://www.instagram.com/fozzz_sizta/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm9.9 1.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1Zm-5.65 1.27a5.28 5.28 0 1 1 0 10.56 5.28 5.28 0 0 1 0-10.56Zm0 1.8a3.48 3.48 0 1 0 0 6.96 3.48 3.48 0 0 0 0-6.96Z"
+              />
+            </svg>
           </a>
-          <a class="social-link" href="https://github.com/FozzzSizTa" target="_blank" rel="noreferrer" aria-label="GitHub">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.21.68-.47v-1.64c-2.78.61-3.37-1.18-3.37-1.18-.46-1.18-1.12-1.49-1.12-1.49-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.9 1.54 2.35 1.1 2.92.84.09-.66.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.5 9.5 0 0 1 12 6.82c.85 0 1.7.11 2.5.33 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.68-4.58 4.92.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.47A10 10 0 0 0 12 2Z"/></svg>
+          <a
+            class="social-link"
+            href="https://github.com/FozzzSizTa"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.21.68-.47v-1.64c-2.78.61-3.37-1.18-3.37-1.18-.46-1.18-1.12-1.49-1.12-1.49-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.9 1.54 2.35 1.1 2.92.84.09-.66.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.5 9.5 0 0 1 12 6.82c.85 0 1.7.11 2.5.33 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.68-4.58 4.92.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.47A10 10 0 0 0 12 2Z"
+              />
+            </svg>
           </a>
         </div>
 
@@ -383,15 +450,18 @@
         <section class="hero-inner">
           <div class="hero-card animate delay-2" aria-label="主頁視覺區塊">
             <div class="hero-copy">
-              <div class="eyebrow animate delay-2">Personal Resume Site</div>
-              <h1 class="animate delay-3">張萁元<span>主頁入口</span></h1>
-              <p class="intro animate delay-3">這是我的個人主頁，後續會在這裡整合履歷、作品集與聯絡方式。先以橫向卡片式主視覺作為入口，讓文字直接覆蓋在照片背景上。</p>
+              <div class="eyebrow animate delay-2">聯絡資訊</div>
+              <h1 class="animate delay-3">張萁元</h1>
+              <div class="contact-info animate delay-3">
+                <p>電話: (+886) 905-459-925</p>
+                <p>Email: ben917355@gmail.com</p>
+                <p>地址: 新北市淡水區忠山里奎柔山路766號二樓</p>
+              </div>
               <div class="actions animate delay-4">
                 <a class="button primary" href="resume.html">前往履歷</a>
                 <a class="button secondary" href="portfolio.html">查看作品集</a>
               </div>
             </div>
-
           </div>
         </section>
       </main>
