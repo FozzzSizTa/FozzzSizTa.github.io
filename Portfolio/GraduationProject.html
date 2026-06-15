@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>張萁元｜畢業專題 Squeak Sage</title>
+    <meta
+      name="description"
+      content="畢業專案：Squeak Sage 遊戲開發作品展示。"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #eef1f5;
+        --surface: rgba(255, 255, 255, 0.78);
+        --text: #172033;
+        --muted: #667085;
+        --accent: #0ea5e9;
+        --accent-dark: #0284c7;
+        --line: rgba(23, 32, 51, 0.12);
+        --shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(14, 165, 233, 0.14),
+            transparent 28%
+          ),
+          linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+        min-height: 100vh;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      @keyframes riseIn {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+          filter: blur(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      .animate {
+        opacity: 0;
+        animation: riseIn 0.85s cubic-bezier(0.12, 0.88, 0.22, 1) both;
+      }
+      .delay-1 {
+        animation-delay: 0.08s;
+      }
+      .delay-2 {
+        animation-delay: 0.18s;
+      }
+      .delay-3 {
+        animation-delay: 0.28s;
+      }
+      .delay-4 {
+        animation-delay: 0.38s;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.05rem clamp(1.1rem, 3vw, 2.5rem);
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+      }
+
+      .socials {
+        display: flex;
+        gap: 0.8rem;
+      }
+      .social-link {
+        width: 2.2rem;
+        height: 2.2rem;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        transition: all 180ms ease;
+      }
+      .social-link:hover {
+        transform: translateY(-2px);
+        color: var(--accent-dark);
+        border-color: rgba(14, 165, 233, 0.3);
+      }
+      .social-link svg {
+        width: 1rem;
+        height: 1rem;
+        fill: currentColor;
+      }
+
+      .nav {
+        display: flex;
+        gap: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .nav a {
+        color: var(--muted);
+        position: relative;
+        padding-bottom: 0.15rem;
+      }
+      .nav a:hover {
+        color: var(--text);
+      }
+
+      .wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 3rem 1.25rem;
+      }
+
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: clamp(1.5rem, 5vw, 3rem);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(12px);
+      }
+
+      .header-area {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3rem);
+        letter-spacing: -0.02em;
+      }
+      .tag {
+        display: inline-block;
+        padding: 0.45rem 1rem;
+        border-radius: 999px;
+        background: rgba(14, 165, 233, 0.1);
+        color: var(--accent-dark);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+
+      .btn-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.8rem 1.5rem;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: all 180ms ease;
+        font-size: 0.9rem;
+      }
+      .btn-primary {
+        background: #172033;
+        color: #fff;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        background: #000;
+      }
+      .btn-outline {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.5);
+        color: var(--text);
+      }
+      .btn-outline:hover {
+        background: #fff;
+        transform: translateY(-2px);
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .description {
+        line-height: 1.8;
+        color: var(--muted);
+        font-size: 1.1rem;
+      }
+
+      .video-container {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        height: 0;
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 2rem 0;
+        box-shadow: var(--shadow);
+      }
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+        margin-top: 1rem;
+      }
+
+      .img-wrapper {
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        aspect-ratio: 16/9;
+        background: #ddd;
+      }
+
+      .img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        cursor: zoom-in;
+      }
+      .img-wrapper:hover img {
+        transform: scale(1.05);
+      }
+
+      .doc-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .back-link {
+        display: inline-flex;
+        margin-top: 3rem;
+        color: var(--muted);
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .back-link:hover {
+        color: var(--accent);
+      }
+
+      /* Lightbox Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(12px);
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        cursor: pointer;
+      }
+      .modal.active {
+        display: flex;
+        animation: modalFade 0.3s ease;
+      }
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 12px;
+        object-fit: contain;
+        cursor: default;
+      }
+      @keyframes modalFade {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .header-area {
+          flex-direction: column;
+        }
+        .btn-group {
+          width: 100%;
+        }
+        .btn {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar animate delay-1">
+        <div class="socials">
+          <a
+            class="social-link"
+            href="https://github.com/FozzzSizTa"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.21.68-.47v-1.64c-2.78.61-3.37-1.18-3.37-1.18-.46-1.18-1.12-1.49-1.12-1.49-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.9 1.54 2.35 1.1 2.92.84.09-.66.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.5 9.5 0 0 1 12 6.82c.85 0 1.7.11 2.5.33 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.68-4.58 4.92.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.47A10 10 0 0 0 12 2Z"
+              />
+            </svg>
+          </a>
+        </div>
+        <nav class="nav">
+          <a href="../index.html">主頁</a>
+          <a href="../resume.html">履歷</a>
+          <a href="../portfolio.html">作品集</a>
+        </nav>
+      </header>
+
+      <main class="wrap">
+        <article class="panel animate delay-2">
+          <div class="header-area">
+            <div>
+              <span class="tag animate delay-2">Graduation Project</span>
+              <h1 class="animate delay-2">Squeak Sage (2025)</h1>
+            </div>
+            <div class="btn-group animate delay-3">
+              <a
+                href="https://github.com/Zhi251/Unity.git"
+                class="btn btn-primary"
+                target="_blank"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.21.68-.47v-1.64c-2.78.61-3.37-1.18-3.37-1.18-.46-1.18-1.12-1.49-1.12-1.49-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.9 1.54 2.35 1.1 2.92.84.09-.66.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.5 9.5 0 0 1 12 6.82c.85 0 1.7.11 2.5.33 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.68-4.58 4.92.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.47A10 10 0 0 0 12 2Z"
+                  />
+                </svg>
+                GitHub (Code)
+              </a>
+              <a
+                href="https://github.com/FozzzSizTa/Squeak_Sage.git"
+                class="btn btn-outline"
+                target="_blank"
+              >
+                <svg
+                  width="18"
+                  height="18"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.21.68-.47v-1.64c-2.78.61-3.37-1.18-3.37-1.18-.46-1.18-1.12-1.49-1.12-1.49-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.9 1.54 2.35 1.1 2.92.84.09-.66.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.5 9.5 0 0 1 12 6.82c.85 0 1.7.11 2.5.33 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.68-4.58 4.92.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.47A10 10 0 0 0 12 2Z"
+                  />
+                </svg>
+                Release Version
+              </a>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <section class="description animate delay-3">
+              <h2>專案概述：模擬公司運營的創新遊戲體驗</h2>
+              <p>
+                「Squeak
+                Sage」是我們五人團隊的畢業專題成果，旨在打造一個高度擬真的公司運營模擬遊戲。此專案不僅僅是一個遊戲，更是一個整合了前端、後端
+                API、資料庫、AI 模擬、客服系統、生成式 AI
+                地圖、版本檢測與更新機制，乃至於模擬儲值系統的綜合性平台。我們期望透過這款遊戲，全面模擬公司從提供服務到創造收入的各個環節，為玩家帶來前所未有的沉浸式體驗。
+              </p>
+
+              <h3>開發動機：AI Agent 啟發的遊戲創新</h3>
+              <p>
+                我們的靈感源於觀察 AI Agent
+                模仿人類遊玩《超級瑪利歐》的案例，這讓我們對 AI
+                在遊戲領域的潛力感到極度興奮。因此，我們決定開發一款類似《超級瑪利歐》的開源遊戲，並進一步利用
+                <strong>MLAgent</strong> 技術，訓練 AI
+                模仿玩家的行為模式，讓遊戲世界更具動態與挑戰性。這不僅是對技術的探索，更是對遊戲互動模式的一次大膽創新。
+              </p>
+
+              <h3>我的角色：Unity 前端開發與 API 整合核心</h3>
+              <p>
+                作為專案中
+                <strong>Unity 前端</strong>
+                的主要負責人，我獨立完成了所有遊戲物件的互動邏輯、UI
+                介面的設計與實作，以及與後端 API
+                的高效連結。這意味著從玩家的每一次點擊、每一次移動，到遊戲畫面的每一個元素，都凝聚了我在
+                Unity 引擎與 C#
+                程式語言上的深厚功力。確保前端的流暢性、響應性與視覺吸引力，是我的核心職責。
+              </p>
+
+              <h3>遊戲特色：豐富內容與商業模式的融合</h3>
+              <p>
+                在遊戲內容設計上，我們團隊集思廣益，創造了各式各樣的趣味怪物與獨特道具。玩家可以策略性地運用這些道具來對抗怪物，從而獲得更豐富、更多元的遊戲體驗。為了模擬真實的商業運營，我們甚至設計了引導玩家進行模擬儲值以購買道具的機制，藉此觀察與分析虛擬公司的收益模式。
+              </p>
+              <p>
+                此外，遊戲提供了「一般模式」與「無盡模式」，滿足不同玩家的挑戰偏好。我們也加入了「記分板」功能，鼓勵玩家之間相互競技，力求高分，增強了遊戲的社群互動性。在視覺呈現方面，我們設計了四種截然不同的地圖美術風格，大幅提升了遊戲的自訂性與重玩價值。值得一提的是，部分地圖的生成更運用了
+                <strong>生成式 AI</strong>
+                技術，展現了前沿技術在遊戲內容創作上的應用。
+              </p>
+
+              <h3>挑戰與成長：API 連結的磨礪與團隊協作</h3>
+              <p>
+                在整個專案的開發過程中，對我而言，最具挑戰性但也收穫最大的莫過於與後端
+                API
+                的連結。由於專案規模龐大，涉及多個模組與系統的協同運作，前端與後端的資料交換與邏輯同步顯得尤為關鍵。慶幸的是，我們團隊在專案初期便進行了充分的討論，確立了詳細的
+                API 格式與規範。我們也善用
+                <strong>GitHub</strong> 進行嚴謹的版本控制與分支管理，並結合
+                <strong>Jira</strong>
+                等專案管理工具，嚴格按照進度表推進開發，有效管理了開發過程中的程式碼衝突與協作效率。
+              </p>
+              <p>
+                然而，在開發過程中，團隊成員豐富的想像力與創造力，也讓我們不斷地在原定計畫之外，加入了更多創新的內容。這雖然增加了與後端溝通的複雜性，以及資料獲取的難度，但也正是在解決這些「意料之外」問題的過程中，我學會了更深入的跨部門溝通技巧、更靈活的問題解決策略，以及如何在高壓下保持高效的開發節奏。這段經歷極大地提升了我的技術實力與團隊協作能力。
+              </p>
+
+              <h3>榮譽與展望：專案成果的肯定</h3>
+              <p>
+                我們的專案成果不僅獲得了校內的肯定，榮獲
+                <strong>專研特優獎第一名</strong> 的殊榮，更有幸受邀參與
+                <strong>2025 電機資訊學院第 14 屆聯合資訊展</strong
+                >。這些榮譽是對我們團隊努力的最高肯定，也讓我對未來的軟體工程之路充滿信心。透過「Squeak
+                Sage」專案，我不僅掌握了 Unity
+                前端開發的精髓，更學會了如何在複雜的團隊協作環境中，將創新理念轉化為實際可行的產品。
+              </p>
+
+              <div class="video-container animate delay-4">
+                <iframe
+                  src="https://www.youtube.com/embed/NDPoypnsln4"
+                  title="YouTube video player"
+                  allow="
+                    accelerometer;
+                    autoplay;
+                    clipboard-write;
+                    encrypted-media;
+                    gyroscope;
+                    picture-in-picture;
+                    web-share;
+                  "
+                  allowfullscreen
+                ></iframe>
+              </div>
+
+              <h3>文件資源</h3>
+              <div class="doc-links">
+                <a
+                  href="https://docs.google.com/document/d/1vV8LS8N1SqfgM3PK-lGApB_2gGj5lDwy/edit?usp=drive_link"
+                  class="btn btn-outline"
+                  target="_blank"
+                >
+                  📄 專刊下載
+                </a>
+                <a
+                  href="https://drive.google.com/file/d/1ocQp0cdc5pdbeoSxnEXsNSXTYjJl9lMJ/view?usp=drive_link"
+                  class="btn btn-outline"
+                  target="_blank"
+                >
+                  📁 總審文件
+                </a>
+                <a
+                  href="https://docs.google.com/presentation/d/1mxdYRS9dEapXBSKfVosVdblFZm7pkTYr/edit?usp=drive_link"
+                  class="btn btn-outline"
+                  target="_blank"
+                >
+                  🎨 專題海報
+                </a>
+              </div>
+            </section>
+
+            <section class="image-gallery animate delay-4">
+              <div class="img-wrapper">
+                <img
+                  src="../image/Graduation_Project_Squeak_Sage/1.png"
+                  alt="專題截圖 1"
+                  onclick="openModal(this.src)"
+                  onerror="
+                    this.src =
+                      'https://via.placeholder.com/800x450?text=Grad+Project+Image+1'
+                  "
+                />
+              </div>
+              <div class="img-wrapper">
+                <img
+                  src="../image/Graduation_Project_Squeak_Sage/2.png"
+                  alt="專題截圖 2"
+                  onclick="openModal(this.src)"
+                  onerror="
+                    this.src =
+                      'https://via.placeholder.com/800x450?text=Grad+Project+Image+2'
+                  "
+                />
+              </div>
+              <div class="img-wrapper">
+                <img
+                  src="../image/Graduation_Project_Squeak_Sage/3.png"
+                  alt="專題截圖 3"
+                  onclick="openModal(this.src)"
+                  onerror="
+                    this.src =
+                      'https://via.placeholder.com/800x450?text=Grad+Project+Image+3'
+                  "
+                />
+              </div>
+            </section>
+          </div>
+
+          <a href="../portfolio.html" class="back-link animate delay-4">
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M19 12H5m0 0l7 7m-7-7l7-7"></path>
+            </svg>
+            回到作品集
+          </a>
+        </article>
+      </main>
+    </div>
+
+    <div id="imageModal" class="modal" onclick="closeModal()">
+      <img
+        id="modalImg"
+        class="modal-content"
+        onclick="event.stopPropagation()"
+      />
+    </div>
+
+    <script>
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImg");
+      function openModal(src) {
+        modal.classList.add("active");
+        modalImg.src = src;
+      }
+      function closeModal() {
+        modal.classList.remove("active");
+      }
+    </script>
+  </body>
+</html>
