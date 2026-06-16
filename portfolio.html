@@ -220,6 +220,8 @@
       }
 
       .card {
+        display: flex;
+        flex-direction: column;
         min-height: 180px;
         padding: 1rem;
         border-radius: 22px;
@@ -244,7 +246,8 @@
 
       .tag {
         display: inline-block;
-        margin-top: 0.9rem;
+        margin-top: auto; /* 將標籤推至容器底部 */
+        align-self: flex-start; /* 確保標籤寬度不會撐滿 */
         padding: 0.45rem 0.75rem;
         border-radius: 999px;
         background: rgba(14, 165, 233, 0.1);
@@ -338,7 +341,11 @@
             <a
               href="Portfolio/BGA.html"
               class="card animate delay-3"
-              style="display: block; transition: transform 0.2s ease"
+              style="
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.2s ease;
+              "
             >
               <strong>BCA Unity Game 2024</strong>
               <p>
@@ -350,7 +357,11 @@
             <a
               href="Portfolio/GraduationProject.html"
               class="card animate delay-4"
-              style="display: block; transition: transform 0.2s ease"
+              style="
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.2s ease;
+              "
             >
               <strong>畢業專題：Squeak Sage</strong>
               <p>
@@ -361,7 +372,11 @@
             <a
               href="Portfolio/CppDSA.html"
               class="card animate delay-5"
-              style="display: block; transition: transform 0.2s ease"
+              style="
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.2s ease;
+              "
             >
               <strong>C++ 資料結構與演算法</strong>
               <p>
@@ -369,6 +384,22 @@
                 資料結構與演算法專案，包含多種排序、河內塔、迷宮求解等。
               </p>
               <span class="tag">C++ Programming</span>
+            </a>
+            <a
+              href="Portfolio/WebTodoList.html"
+              class="card animate delay-6"
+              style="
+                display: flex;
+                flex-direction: column;
+                transition: transform 0.2s ease;
+              "
+            >
+              <strong>動態網頁設計：多功能 Todo List</strong>
+              <p>
+                使用 Ubuntu 與 MySQL
+                打造後端伺服器，具備完整的帳號系統、科目分類、社群好友及精細權限設定。
+              </p>
+              <span class="tag">Web Development</span>
             </a>
           </div>
         </section>
