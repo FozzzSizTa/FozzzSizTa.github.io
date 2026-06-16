@@ -214,9 +214,36 @@
       }
 
       .gallery {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        display: grid; /* 使用 Grid 佈局 */
+        grid-template-columns: repeat(2, minmax(0, 1fr)); /* 兩欄排列 */
         gap: 1rem;
+      }
+
+      .album-section {
+        display: grid;
+        gap: 2.5rem; /* 間距 */
+        margin-top: 2.5rem; /* 與上方作品集區塊的間距 */
+      }
+
+      .album-item {
+        background: rgba(255, 255, 255, 0.62);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 1.5rem;
+        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.06);
+      }
+
+      .album-item h3 {
+        margin-top: 0;
+        margin-bottom: 0.8rem;
+        font-size: 1.5rem;
+        color: var(--text);
+      }
+
+      .album-item p {
+        color: var(--muted);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
       }
 
       .card {
@@ -253,6 +280,75 @@
         background: rgba(14, 165, 233, 0.1);
         color: #075985;
         border: 1px solid rgba(14, 165, 233, 0.18);
+      }
+
+      .album-item .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(150px, 1fr)
+        ); /* 圖片網格 */
+        gap: 1rem;
+      }
+
+      /* 針對畢業典禮相簿強制 3x2 排列 */
+      .album-item .image-gallery[data-gallery-id="graduation"] {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .album-item .img-wrapper {
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        aspect-ratio: 16/9;
+        background: #eee;
+      }
+
+      .album-item .img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .album-item .img-wrapper img:hover {
+        transform: scale(1.05);
+      }
+
+      /* Lightbox Modal for Gallery */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(12px);
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        cursor: pointer;
+      }
+      .modal.active {
+        display: flex;
+        animation: modalFade 0.3s ease;
+      }
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 12px;
+        object-fit: contain;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        cursor: default;
+      }
+      .close-modal {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        color: white;
+        font-size: 3rem;
+        line-height: 1;
+        cursor: pointer;
       }
 
       @media (max-width: 920px) {
@@ -331,7 +427,7 @@
             <div>
               <h1 class="animate delay-2">作品集</h1>
               <p class="lead animate delay-3">
-                這一頁先保留為作品展示區，之後可放專案截圖、設計成品、網站作品或其他成果。
+                收錄了我在資訊工程領域的多樣化專案實踐，包含遊戲引擎應用、全端系統開發及演算法研究，展現對技術的熱忱與問題解決能力。
               </p>
             </div>
             <a class="back animate delay-3" href="index.html">回到主畫面</a>
@@ -434,8 +530,204 @@
               <span class="tag">Personal Project</span>
             </a>
           </div>
+
+          <div class="top animate delay-9" style="margin-top: 3rem">
+            <div>
+              <h1 class="animate delay-9">個人相簿</h1>
+              <p class="lead animate delay-10">記錄生活中的重要時刻與成就。</p>
+            </div>
+          </div>
+
+          <div class="album-section">
+            <div class="album-item animate delay-11">
+              <h3>畢業典禮</h3>
+              <p>
+                在這次的畢業典禮，收穫了許多祝福，也獲得了畢業專題第一名及優秀幹部獎。
+              </p>
+              <div class="image-gallery" data-gallery-id="graduation">
+                <div class="img-wrapper">
+                  <img
+                    src="image/graduation/1.png"
+                    alt="畢業典禮 1"
+                    onclick="openGalleryModal('graduation', 0)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=Graduation+1+Not+Found'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="image/graduation/2.png"
+                    alt="畢業典禮 2"
+                    onclick="openGalleryModal('graduation', 1)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=Graduation+2+Not+Found'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="image/graduation/3.png"
+                    alt="畢業典禮 3"
+                    onclick="openGalleryModal('graduation', 2)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=Graduation+3+Not+Found'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="image/graduation/4.png"
+                    alt="畢業典禮 4"
+                    onclick="openGalleryModal('graduation', 3)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=Graduation+4+Not+Found'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="image/graduation/5.png"
+                    alt="畢業典禮 5"
+                    onclick="openGalleryModal('graduation', 4)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=Graduation+5+Not+Found'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="image/graduation/6.png"
+                    alt="畢業典禮 6"
+                    onclick="openGalleryModal('graduation', 5)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=Graduation+6+Not+Found'
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="album-item animate delay-12">
+              <h3>TANET</h3>
+              <p>
+                在本次TANET得到優秀論文獎，在聽了大家的各種論文也感到獲益良多。
+              </p>
+              <div class="image-gallery" data-gallery-id="tanet">
+                <div class="img-wrapper">
+                  <img
+                    src="image/TANET/1.png"
+                    alt="TANET 1"
+                    onclick="openGalleryModal('tanet', 0)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=TANET+1+Not+Found'
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="album-item animate delay-13">
+              <h3>2023 CPE</h3>
+              <p>
+                在本測驗中，我獲得了前15%的成績，這是在我大一時考的，雖然成績可能不到最好，但是能證明我在沒有使用AI的情況下仍然有基本的程式能力，可以解決大部分問題。
+              </p>
+              <div class="image-gallery" data-gallery-id="cpe">
+                <div class="img-wrapper">
+                  <img
+                    src="image/CPE/1.png"
+                    alt="CPE 1"
+                    onclick="openGalleryModal('cpe', 0)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=CPE+1+Not+Found'
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
+
+      <!-- Lightbox Modal for Gallery -->
+      <div id="galleryModal" class="modal" onclick="closeGalleryModal()">
+        <span class="close-modal">&times;</span>
+        <img
+          id="galleryModalImg"
+          class="modal-content"
+          onclick="event.stopPropagation()"
+        />
+        <a class="prev" onclick="plusSlides(-1, event)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1, event)">&#10095;</a>
+      </div>
+
+      <script>
+        const galleryModal = document.getElementById("galleryModal");
+        const galleryModalImg = document.getElementById("galleryModalImg");
+        const closeGalleryBtn = galleryModal.querySelector(".close-modal");
+        let currentGalleryImages = [];
+        let currentImageIndex = 0;
+
+        const galleries = {
+          graduation: [
+            "image/graduation/1.png",
+            "image/graduation/2.png",
+            "image/graduation/3.png",
+            "image/graduation/4.png",
+            "image/graduation/5.png",
+            "image/graduation/6.png",
+          ],
+          tanet: ["image/TANET/1.png"],
+          cpe: ["image/CPE/1.png"],
+        };
+
+        function openGalleryModal(galleryId, index) {
+          currentGalleryImages = galleries[galleryId];
+          currentImageIndex = index;
+          galleryModal.classList.add("active");
+          showImage(currentImageIndex);
+          galleryModal.querySelector(".prev").style.display =
+            currentGalleryImages.length > 1 ? "block" : "none";
+          galleryModal.querySelector(".next").style.display =
+            currentGalleryImages.length > 1 ? "block" : "none";
+        }
+
+        function showImage(index) {
+          if (index >= currentGalleryImages.length) {
+            currentImageIndex = 0;
+          }
+          if (index < 0) {
+            currentImageIndex = currentGalleryImages.length - 1;
+          }
+          galleryModalImg.src = currentGalleryImages[currentImageIndex];
+        }
+
+        function plusSlides(n, event) {
+          event.stopPropagation();
+          showImage((currentImageIndex += n));
+        }
+
+        function closeGalleryModal() {
+          galleryModal.classList.remove("active");
+        }
+
+        galleryModal.addEventListener("click", function (event) {
+          if (
+            event.target === galleryModal ||
+            event.target === closeGalleryBtn
+          ) {
+            closeGalleryModal();
+          }
+        });
+      </script>
     </div>
   </body>
 </html>
