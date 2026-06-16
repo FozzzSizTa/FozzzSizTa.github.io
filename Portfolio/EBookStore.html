@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>張萁元｜伺服器架設 Todo List</title>
+    <title>張萁元｜動態網頁設計 模擬電子書商城</title>
     <meta
       name="description"
-      content="伺服器架設期末專案：整合社群功能與權限管理的 Todo List 系統。"
+      content="動態網頁設計期末專案：模擬電子書商城功能展示。"
     />
     <style>
       :root {
@@ -24,7 +24,6 @@
       * {
         box-sizing: border-box;
       }
-
       body {
         margin: 0;
         font-family: "Segoe UI", Arial, sans-serif;
@@ -38,7 +37,6 @@
           linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
         min-height: 100vh;
       }
-
       a {
         color: inherit;
         text-decoration: none;
@@ -56,7 +54,6 @@
           filter: blur(0);
         }
       }
-
       .animate {
         opacity: 0;
         animation: riseIn 0.85s cubic-bezier(0.12, 0.88, 0.22, 1) both;
@@ -129,7 +126,6 @@
         margin: 0 auto;
         padding: 3rem 1.25rem;
       }
-
       .panel {
         background: var(--surface);
         border: 1px solid var(--line);
@@ -147,7 +143,6 @@
         gap: 1.5rem;
         margin-bottom: 2.5rem;
       }
-
       h1 {
         margin: 0;
         font-size: clamp(2rem, 5vw, 3rem);
@@ -164,34 +159,49 @@
         margin-top: 0.5rem;
       }
 
-      .content-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
+      .btn-git {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.8rem 1.5rem;
+        background: #172033;
+        color: #fff;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: transform 180ms ease;
+      }
+      .btn-git:hover {
+        transform: translateY(-2px);
+        background: #000;
       }
 
       .description {
         line-height: 1.8;
         color: var(--muted);
         font-size: 1.1rem;
+        margin-bottom: 2rem;
       }
-
-      .video-container {
-        position: relative;
-        width: 100%;
-        padding-bottom: 56.25%; /* 16:9 比例 */
-        height: 0;
-        border-radius: 20px;
+      .image-gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.2rem;
+      }
+      .img-wrapper {
+        border-radius: 18px;
         overflow: hidden;
-        box-shadow: var(--shadow);
+        border: 1px solid var(--line);
+        aspect-ratio: 16/9;
+        background: #ddd;
       }
-      .video-container iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
+      .img-wrapper img {
         width: 100%;
         height: 100%;
-        border: 0;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        cursor: zoom-in;
+      }
+      .img-wrapper:hover img {
+        transform: scale(1.05);
       }
 
       .back-link {
@@ -205,9 +215,38 @@
         color: var(--accent);
       }
 
-      @media (max-width: 640px) {
-        .header-area {
-          flex-direction: column;
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(12px);
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        cursor: pointer;
+      }
+      .modal.active {
+        display: flex;
+        animation: modalFade 0.3s ease;
+      }
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 12px;
+        object-fit: contain;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        cursor: default;
+      }
+      @keyframes modalFade {
+        from {
+          opacity: 0;
+          transform: scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
         }
       }
     </style>
@@ -268,86 +307,99 @@
           <div class="header-area">
             <div>
               <span class="tag animate delay-2">Web Development</span>
-              <h1 class="animate delay-2">
-                伺服器架設：多功能 Todo List (2024)
-              </h1>
+              <h1 class="animate delay-2">動態網頁設計：模擬電子書商城</h1>
             </div>
+            <a
+              href="https://github.com/FozzzSizTa/mcu-113-2-web-11360661-final.git"
+              class="btn-git animate delay-3"
+              target="_blank"
+            >
+              <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+              GitHub 原始碼
+            </a>
           </div>
 
-          <div class="content-grid">
-            <section class="description animate delay-3">
-              <p>
-                本作品為 2024
-                年「伺服器架設」課程的期末專案，是一套整合社群功能與權限管理的完整
-                Todo List 系統。 專案採用了 <strong>Ubuntu</strong> 作業系統搭配
-                <strong>MySQL</strong> 資料庫構建伺服器後端環境，並透過
-                <strong>HTML</strong> 與
-                <strong>CSS</strong> 打造具備響應式體驗的前端介面。
-              </p>
+          <section class="description animate delay-3">
+            <p>
+              本作品為系外選修「動態網頁設計」課程的期末專案。核心目標是利用現代網頁開發技術，建構一個功能齊全的「模擬電子書商城」平台，實現從商品瀏覽到虛擬下單的完整電商體驗。
+            </p>
+            <p><strong>技術架構與功能亮點：</strong></p>
+            <ul style="padding-left: 1.2rem">
+              <li>
+                <strong>開發環境：</strong> 使用
+                <strong>Angular</strong> 框架開發，並透過
+                <code>ng-serve</code> 進行前端高效渲染。
+              </li>
+              <li>
+                <strong>模擬後端：</strong> 運用
+                <strong>json-server</strong> 快速搭建 mock RESTful
+                API，模擬真實資料庫的資料存取行為。
+              </li>
+              <li>
+                <strong>搜尋機制：</strong>
+                實作了靈活的搜尋引擎，支援透過「書名」或「作者」關鍵字精確篩選目標電子書。
+              </li>
+              <li>
+                <strong>電商邏輯：</strong>
+                包含完整的商品明細檢視、購物車動態增刪，以及模擬下單結帳流程。
+              </li>
+              <li>
+                <strong>版本控制：</strong> 專案全程使用
+                <strong>Git</strong> 進行版本管理，確保開發紀錄的嚴謹性。
+              </li>
+            </ul>
+          </section>
 
-              <p><strong>核心功能與特色：</strong></p>
-              <ul style="padding-left: 1.2rem; margin-top: -0.5rem">
-                <li>
-                  <strong>完善帳號系統：</strong>
-                  支援使用者註冊與登入，確保個人資料的安全性與獨立性。
-                </li>
-                <li>
-                  <strong>科目任務管理：</strong>
-                  使用者可以根據不同科目或類別新增與刪除 Todo
-                  List，提升任務管理的條理性。
-                </li>
-                <li>
-                  <strong>社群功能整合：</strong>
-                  內建好友與群組系統。使用者可以添加好友、加入群組，並即時查看好友及群組成員的
-                  Todo List 進度。
-                </li>
-                <li>
-                  <strong>細膩權限設定：</strong> 針對每個 Todo List
-                  提供權限控制，可設定為「僅限自己可見」、「朋友可見」或「群組可見」，在分享與隱私之間達成平衡。
-                </li>
-              </ul>
-
-              <p>
-                透過此專案，我深刻體會了從伺服器端環境建置到前端介面設計的完整流程，並在實作社群互動與權限邏輯的過程中，精進了資料庫結構設計與網頁應用開發的能力。
-              </p>
-
-              <h3 style="margin-top: 2rem">展示影片 01 - 任務新增與刪除</h3>
-              <div class="video-container animate delay-4">
-                <iframe
-                  src="https://www.youtube.com/embed/7694XICxbBk"
-                  title="YouTube video player"
-                  allow="
-                    accelerometer;
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    gyroscope;
-                    picture-in-picture;
-                    web-share;
-                  "
-                  allowfullscreen
-                ></iframe>
-              </div>
-
-              <h3 style="margin-top: 2.5rem">展示影片 02 - 好友及群組功能</h3>
-              <div class="video-container animate delay-4">
-                <iframe
-                  src="https://www.youtube.com/embed/xCk8qD47-EI"
-                  title="YouTube video player"
-                  allow="
-                    accelerometer;
-                    autoplay;
-                    clipboard-write;
-                    encrypted-media;
-                    gyroscope;
-                    picture-in-picture;
-                    web-share;
-                  "
-                  allowfullscreen
-                ></iframe>
-              </div>
-            </section>
-          </div>
+          <section class="image-gallery animate delay-4">
+            <div class="img-wrapper">
+              <img
+                src="../image/eBook_Store/1.png"
+                alt="商城截圖 1"
+                onclick="openModal(this.src)"
+                onerror="
+                  this.src =
+                    'https://via.placeholder.com/800x450?text=Image+1+Not+Found'
+                "
+              />
+            </div>
+            <div class="img-wrapper">
+              <img
+                src="../image/eBook_Store/2.png"
+                alt="商城截圖 2"
+                onclick="openModal(this.src)"
+                onerror="
+                  this.src =
+                    'https://via.placeholder.com/800x450?text=Image+2+Not+Found'
+                "
+              />
+            </div>
+            <div class="img-wrapper">
+              <img
+                src="../image/eBook_Store/3.png"
+                alt="商城截圖 3"
+                onclick="openModal(this.src)"
+                onerror="
+                  this.src =
+                    'https://via.placeholder.com/800x450?text=Image+3+Not+Found'
+                "
+              />
+            </div>
+            <div class="img-wrapper">
+              <img
+                src="../image/eBook_Store/4.png"
+                alt="商城截圖 4"
+                onclick="openModal(this.src)"
+                onerror="
+                  this.src =
+                    'https://via.placeholder.com/800x450?text=Image+4+Not+Found'
+                "
+              />
+            </div>
+          </section>
 
           <a href="../portfolio.html" class="back-link animate delay-4">
             <svg
@@ -365,5 +417,35 @@
         </article>
       </main>
     </div>
+
+    <div id="imageModal" class="modal" onclick="closeModal()">
+      <span
+        style="
+          position: absolute;
+          top: 1.5rem;
+          right: 2rem;
+          color: white;
+          font-size: 3rem;
+        "
+        >&times;</span
+      >
+      <img
+        id="modalImg"
+        class="modal-content"
+        onclick="event.stopPropagation()"
+      />
+    </div>
+
+    <script>
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImg");
+      function openModal(src) {
+        modal.classList.add("active");
+        modalImg.src = src;
+      }
+      function closeModal() {
+        modal.classList.remove("active");
+      }
+    </script>
   </body>
 </html>
