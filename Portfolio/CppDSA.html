@@ -1,0 +1,743 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>張萁元｜C++ 資料結構與演算法</title>
+    <meta
+      name="description"
+      content="C++ 資料結構與演算法作品集，包含排序、河內塔、老鼠走迷宮等。"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #eef1f5;
+        --surface: rgba(255, 255, 255, 0.78);
+        --text: #172033;
+        --muted: #667085;
+        --accent: #0ea5e9;
+        --accent-dark: #0284c7;
+        --line: rgba(23, 32, 51, 0.12);
+        --shadow: 0 30px 80px rgba(15, 23, 42, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(14, 165, 233, 0.14),
+            transparent 28%
+          ),
+          linear-gradient(180deg, #f8fafc 0%, var(--bg) 100%);
+        min-height: 100vh;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      @keyframes riseIn {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+          filter: blur(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      .animate {
+        opacity: 0;
+        animation: riseIn 0.85s cubic-bezier(0.12, 0.88, 0.22, 1) both;
+      }
+      .delay-1 {
+        animation-delay: 0.08s;
+      }
+      .delay-2 {
+        animation-delay: 0.18s;
+      }
+      .delay-3 {
+        animation-delay: 0.28s;
+      }
+      .delay-4 {
+        animation-delay: 0.38s;
+      }
+
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.05rem clamp(1.1rem, 3vw, 2.5rem);
+        border-bottom: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.55);
+        backdrop-filter: blur(16px);
+      }
+
+      .socials {
+        display: flex;
+        gap: 0.8rem;
+      }
+      .social-link {
+        width: 2.2rem;
+        height: 2.2rem;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 999px;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(23, 32, 51, 0.08);
+        transition: all 180ms ease;
+      }
+      .social-link:hover {
+        transform: translateY(-2px);
+        color: var(--accent-dark);
+        border-color: rgba(14, 165, 233, 0.3);
+      }
+      .social-link svg {
+        width: 1rem;
+        height: 1rem;
+        fill: currentColor;
+      }
+
+      .nav {
+        display: flex;
+        gap: 1.5rem;
+        font-size: 0.95rem;
+      }
+      .nav a {
+        color: var(--muted);
+        position: relative;
+        padding-bottom: 0.15rem;
+      }
+      .nav a:hover {
+        color: var(--text);
+      }
+
+      .wrap {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 3rem 1.25rem;
+      }
+
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        padding: clamp(1.5rem, 5vw, 3rem);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(12px);
+      }
+
+      .header-area {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 2.5rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3rem);
+        letter-spacing: -0.02em;
+      }
+      .tag {
+        display: inline-block;
+        padding: 0.45rem 1rem;
+        border-radius: 999px;
+        background: rgba(14, 165, 233, 0.1);
+        color: var(--accent-dark);
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+
+      .btn-git {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.8rem 1.5rem;
+        background: #172033;
+        color: #fff;
+        border-radius: 999px;
+        font-weight: 600;
+        transition: transform 180ms ease;
+      }
+      .btn-git:hover {
+        transform: translateY(-2px);
+        background: #000;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .description {
+        line-height: 1.8;
+        color: var(--muted);
+        font-size: 1.1rem;
+      }
+
+      .image-gallery {
+        margin-top: 1rem;
+      }
+
+      .image-grid-semester {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+        margin-bottom: 2rem;
+      }
+
+      .img-wrapper {
+        border-radius: 18px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        aspect-ratio: 16/9;
+        background: #ddd;
+      }
+
+      .img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+        cursor: zoom-in;
+      }
+      .img-wrapper:hover img {
+        transform: scale(1.05);
+      }
+
+      .back-link {
+        display: inline-flex;
+        margin-top: 3rem;
+        color: var(--muted);
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .back-link:hover {
+        color: var(--accent);
+      }
+
+      @media (max-width: 640px) {
+        .header-area {
+          flex-direction: column;
+        }
+        .btn-git {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      /* 燈箱 Modal 樣式 */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(12px);
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        cursor: pointer;
+      }
+      .modal.active {
+        display: flex;
+        animation: modalFade 0.3s ease;
+      }
+      .modal-content {
+        max-width: 90%;
+        max-height: 90%;
+        border-radius: 12px;
+        object-fit: contain;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        cursor: default;
+      }
+      .close-modal {
+        position: absolute;
+        top: 1.5rem;
+        right: 2rem;
+        color: white;
+        font-size: 3rem;
+        line-height: 1;
+      }
+      @keyframes modalFade {
+        from {
+          opacity: 0;
+          transform: scale(0.98);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="topbar animate delay-1">
+        <div class="socials">
+          <a
+            class="social-link"
+            href="https://www.facebook.com/zhang.qi.yuan.685201"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Facebook"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M13.5 22v-8.2h2.76l.41-3.2H13.5V8.6c0-.93.26-1.56 1.6-1.56h1.7V4.18c-.3-.04-1.33-.12-2.53-.12-2.5 0-4.22 1.53-4.22 4.34v2.5H7.28v3.2h2.76V22h3.46z"
+              />
+            </svg>
+          </a>
+          <a
+            class="social-link"
+            href="https://www.instagram.com/fozzz_sizta/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Instagram"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.8A3.95 3.95 0 0 0 3.8 7.75v8.5a3.95 3.95 0 0 0 3.95 3.95h8.5a3.95 3.95 0 0 0 3.95-3.95v-8.5a3.95 3.95 0 0 0-3.95-3.95h-8.5Zm9.9 1.1a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1Zm-5.65 1.27a5.28 5.28 0 1 1 0 10.56 5.28 5.28 0 0 1 0-10.56Zm0 1.8a3.48 3.48 0 1 0 0 6.96 3.48 3.48 0 0 0 0-6.96Z"
+              />
+            </svg>
+          </a>
+          <a
+            class="social-link"
+            href="https://github.com/FozzzSizTa"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.21.68-.47v-1.64c-2.78.61-3.37-1.18-3.37-1.18-.46-1.18-1.12-1.49-1.12-1.49-.91-.62.07-.61.07-.61 1 .07 1.53 1.04 1.53 1.04.9 1.54 2.35 1.1 2.92.84.09-.66.35-1.1.64-1.35-2.22-.25-4.56-1.11-4.56-4.93 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02A9.5 9.5 0 0 1 12 6.82c.85 0 1.7.11 2.5.33 1.91-1.3 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.83-2.35 4.68-4.58 4.92.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.47A10 10 0 0 0 12 2Z"
+              />
+            </svg>
+          </a>
+        </div>
+        <nav class="nav">
+          <a href="../index.html">主頁</a>
+          <a href="../resume.html">履歷</a>
+          <a href="../portfolio.html">作品集</a>
+        </nav>
+      </header>
+
+      <main class="wrap">
+        <article class="panel animate delay-2">
+          <div class="header-area">
+            <div>
+              <span class="tag animate delay-2">C++ Programming</span>
+              <h1 class="animate delay-2">C++ 資料結構與演算法 (2023-2024)</h1>
+            </div>
+            <a
+              href="https://github.com/FozzzSizTa/Data_Structures_and_Algorithms_C-Builder.git"
+              class="btn-git animate delay-3"
+              target="_blank"
+            >
+              <svg width="20" height="20" fill="white" viewBox="0 0 24 24">
+                <path
+                  d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+                />
+              </svg>
+              GitHub 原始碼
+            </a>
+          </div>
+
+          <div class="content-grid">
+            <section class="description animate delay-3">
+              <p>
+                此專案集結了我在 2023 至 2024 年間，於大學課程中實作的各項 C++
+                資料結構與演算法練習。透過親手編寫程式碼，我深入理解了這些核心計算機科學概念的運作原理，並鍛鍊了問題分析與解決能力。這不僅是學術上的探索，更是將理論知識轉化為實際應用能力的過程。
+              </p>
+
+              <p><strong>專案亮點與技術實作：</strong></p>
+              <ul style="padding-left: 1.2rem; margin-top: -0.5rem">
+                <li>
+                  <strong>排序演算法：</strong>
+                  實作了多種經典排序演算法，如氣泡排序 (Bubble Sort)、選擇排序
+                  (Selection Sort)、插入排序 (Insertion Sort)、快速排序 (Quick
+                  Sort) 和合併排序 (Merge Sort)
+                  等。透過比較不同演算法的效率與適用場景，加深了對時間複雜度與空間複雜度的理解。
+                </li>
+                <li>
+                  <strong>河內塔 (Tower of Hanoi)：</strong>
+                  運用遞迴 (Recursion)
+                  思想解決經典的河內塔問題，清晰展示了遞迴函式的設計與執行流程，是理解遞迴邏輯的絕佳範例。
+                </li>
+                <li>
+                  <strong>老鼠走迷宮 (Maze Solver)：</strong>
+                  實作了迷宮路徑搜尋演算法，通常採用深度優先搜尋 (DFS)
+                  或廣度優先搜尋 (BFS)
+                  等技術。這項實作不僅考驗了對圖形遍歷演算法的掌握，也展示了如何將抽象問題具體化為程式邏輯。
+                </li>
+                <li>
+                  <strong>其他資料結構：</strong>
+                  還包含了鏈結串列 (Linked List)、堆疊 (Stack)、佇列 (Queue)、樹
+                  (Tree) 等基本資料結構的實作，為更複雜的演算法奠定基礎。
+                </li>
+              </ul>
+
+              <p>
+                這些專案不僅提升了我的 C++
+                程式設計能力，更重要的是培養了我邏輯思維、演算法設計與除錯的關鍵技能。每個實作都是一次挑戰，也是一次成長，讓我對軟體開發的核心有了更深刻的體會。
+              </p>
+            </section>
+
+            <section class="image-gallery animate delay-4">
+              <h3>上學期作品截圖</h3>
+              <div class="image-grid-semester">
+                <!-- 上學期圖片 (1/1 到 1/5) -->
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/1/1.png"
+                    alt="C++ 資料結構上學期截圖 1"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+1-1'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/1/2.png"
+                    alt="C++ 資料結構上學期截圖 2"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+1-2'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/1/3.png"
+                    alt="C++ 資料結構上學期截圖 3"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+1-3'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/1/4.png"
+                    alt="C++ 資料結構上學期截圖 4"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+1-4'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/1/5.png"
+                    alt="C++ 資料結構上學期截圖 5"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+1-5'
+                    "
+                  />
+                </div>
+              </div>
+
+              <h3 style="margin-top: 2.5rem">下學期作品截圖</h3>
+              <div class="image-grid-semester">
+                <!-- 下學期圖片 (2/1 到 2/21) -->
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/1.png"
+                    alt="C++ 資料結構下學期截圖 1"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-1'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/2.png"
+                    alt="C++ 資料結構下學期截圖 2"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-2'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/3.png"
+                    alt="C++ 資料結構下學期截圖 3"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-3'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/4.png"
+                    alt="C++ 資料結構下學期截圖 4"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-4'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/5.png"
+                    alt="C++ 資料結構下學期截圖 5"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-5'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/6.png"
+                    alt="C++ 資料結構下學期截圖 6"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-6'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/7.png"
+                    alt="C++ 資料結構下學期截圖 7"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-7'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/8.png"
+                    alt="C++ 資料結構下學期截圖 8"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-8'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/9.png"
+                    alt="C++ 資料結構下學期截圖 9"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-9'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/10.png"
+                    alt="C++ 資料結構下學期截圖 10"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-10'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/11.png"
+                    alt="C++ 資料結構下學期截圖 11"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-11'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/12.png"
+                    alt="C++ 資料結構下學期截圖 12"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-12'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/13.png"
+                    alt="C++ 資料結構下學期截圖 13"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-13'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/14.png"
+                    alt="C++ 資料結構下學期截圖 14"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-14'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/15.png"
+                    alt="C++ 資料結構下學期截圖 15"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-15'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/16.png"
+                    alt="C++ 資料結構下學期截圖 16"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-16'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/17.png"
+                    alt="C++ 資料結構下學期截圖 17"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-17'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/18.png"
+                    alt="C++ 資料結構下學期截圖 18"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-18'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/19.png"
+                    alt="C++ 資料結構下學期截圖 19"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-19'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/20.png"
+                    alt="C++ 資料結構下學期截圖 20"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-20'
+                    "
+                  />
+                </div>
+                <div class="img-wrapper">
+                  <img
+                    src="../image/C++Build/2/21.png"
+                    alt="C++ 資料結構下學期截圖 21"
+                    onclick="openModal(this.src)"
+                    onerror="
+                      this.src =
+                        'https://via.placeholder.com/800x450?text=C++Build+2-21'
+                    "
+                  />
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <a href="../portfolio.html" class="back-link animate delay-4">
+            <svg
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M19 12H5m0 0l7 7m-7-7l7-7"></path>
+            </svg>
+            回到作品集
+          </a>
+        </article>
+      </main>
+    </div>
+
+    <!-- 燈箱 HTML 結構 -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+      <span class="close-modal">&times;</span>
+      <img
+        id="modalImg"
+        class="modal-content"
+        onclick="event.stopPropagation()"
+      />
+    </div>
+
+    <script>
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImg");
+
+      function openModal(src) {
+        modal.classList.add("active");
+        modalImg.src = src;
+      }
+
+      function closeModal() {
+        modal.classList.remove("active");
+      }
+    </script>
+  </body>
+</html>
